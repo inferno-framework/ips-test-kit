@@ -54,7 +54,7 @@ module IPS
 
         composition = resource
         references_in_composition = []
-        walk_resource(composition) do |value, meta, _path|
+        composition.each_element do |value, meta, _path|
           next if meta['type'] != 'Reference'
           next if value.reference.blank?
 
