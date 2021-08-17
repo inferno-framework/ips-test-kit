@@ -3,6 +3,7 @@ require_relative '../../lib/ips/summary_operation'
 RSpec.describe IPS::SummaryOperation do
   let(:suite) { Inferno::Repositories::TestSuites.new.find('ips') }
   let(:group) { suite.groups.first.groups.last }
+  let(:session_data_repo) { Inferno::Repositories::SessionData.new }
   let(:test_session) { repo_create(:test_session, test_suite_id: 'ips') }
   let(:url) { 'http://example.com/fhir' }
   let(:error_outcome) { FHIR::OperationOutcome.new(issue: [{ severity: 'error' }]) }
@@ -15,8 +16,10 @@ RSpec.describe IPS::SummaryOperation do
   def run(runnable, inputs = {})
     test_run_params = { test_session_id: test_session.id }.merge(runnable.reference_hash)
     test_run = Inferno::Repositories::TestRuns.new.create(test_run_params)
-    Inferno::TestRunner.new(test_session: test_session, test_run: test_run).run(runnable, inputs)
-    Inferno::Repositories::TestRuns.new.results_for_test_run(test_run.id)
+    inputs.each do |name, value|
+      session_data_repo.save(test_session_id: test_session.id, name: name, value: value)
+    end
+    Inferno::TestRunner.new(test_session: test_session, test_run: test_run).run(runnable)
   end
 
   describe 'Capability test' do
@@ -41,7 +44,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:get, "#{url}/metadata")
           .to_return(status: 200, body: resource.to_json)
 
-      result = run(test, { url: url }).first
+      result = run(test, { url: url })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('pass')
@@ -52,7 +55,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:get, "#{url}/metadata")
           .to_return(status: 500)
 
-      result = run(test, { url: url }).first
+      result = run(test, { url: url })
 
       expect(stubbed_request).to have_been_made.at_least_once
       expect(result.result).to eq('fail')
@@ -65,7 +68,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:get, "#{url}/metadata")
           .to_return(status: 200, body: resource.to_json)
 
-      result = run(test, { url: url }).first
+      result = run(test, { url: url })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('fail')
@@ -87,7 +90,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:post, "#{url}/Patient/#{patient_id}/$summary")
           .to_return(status: 200, body: resource.to_json)
 
-      result = run(test, { url: url, patient_id: patient_id }).first
+      result = run(test, { url: url, patient_id: patient_id })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('pass')
@@ -99,7 +102,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:post, "#{url}/Patient/#{patient_id}/$summary")
           .to_return(status: 201, body: resource.to_json)
 
-      result = run(test, { url: url, patient_id: patient_id }).first
+      result = run(test, { url: url, patient_id: patient_id })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('fail')
@@ -111,7 +114,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:post, "#{url}/Patient/#{patient_id}/$summary")
           .to_return(status: 200, body: FHIR::Patient.new.to_json)
 
-      result = run(test, { url: url, patient_id: patient_id }).first
+      result = run(test, { url: url, patient_id: patient_id })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('fail')
@@ -128,7 +131,7 @@ RSpec.describe IPS::SummaryOperation do
         stub_request(:post, "#{url}/Patient/#{patient_id}/$summary")
           .to_return(status: 200, body: resource.to_json)
 
-      result = run(test, { url: url, patient_id: patient_id }).first
+      result = run(test, { url: url, patient_id: patient_id })
 
       expect(stubbed_request).to have_been_made.once
       expect(result.result).to eq('fail')
@@ -152,7 +155,7 @@ RSpec.describe IPS::SummaryOperation do
         .with(query: hash_including({}))
         .to_return(status: 200, body: FHIR::OperationOutcome.new.to_json)
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('pass')
     end
@@ -165,7 +168,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: FHIR::Patient.new.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('skip')
     end
@@ -183,7 +186,7 @@ RSpec.describe IPS::SummaryOperation do
         .with(query: hash_including({}))
         .to_return(status: 200, body: FHIR::OperationOutcome.new.to_json)
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/first entry/)
@@ -202,7 +205,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/Resource does not conform/)
@@ -225,7 +228,7 @@ RSpec.describe IPS::SummaryOperation do
         .with(query: hash_including({}))
         .to_return(status: 200, body: FHIR::OperationOutcome.new.to_json)
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('pass')
     end
@@ -238,7 +241,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: FHIR::Patient.new.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('skip')
     end
@@ -252,7 +255,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/does not contain/)
@@ -271,7 +274,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/bundle entries are invalid/)
@@ -294,7 +297,7 @@ RSpec.describe IPS::SummaryOperation do
         .with(query: hash_including({}))
         .to_return(status: 200, body: FHIR::OperationOutcome.new.to_json)
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('pass')
     end
@@ -307,7 +310,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: FHIR::Patient.new.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('skip')
     end
@@ -321,7 +324,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/does not contain/)
@@ -340,7 +343,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/bundle entries are invalid/)
@@ -363,7 +366,7 @@ RSpec.describe IPS::SummaryOperation do
         .with(query: hash_including({}))
         .to_return(status: 200, body: FHIR::OperationOutcome.new.to_json)
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('pass')
     end
@@ -376,7 +379,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: FHIR::Patient.new.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('skip')
     end
@@ -390,7 +393,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/does not contain/)
@@ -409,7 +412,7 @@ RSpec.describe IPS::SummaryOperation do
         response_body: resource.to_json
       )
 
-      result = run(test).first
+      result = run(test)
 
       expect(result.result).to eq('fail')
       expect(result.result_message).to match(/bundle entries are invalid/)

@@ -14,5 +14,7 @@ these tests so that you don't have to configure ruby locally.
 - Clone this repo.
 - Run `docker-compose build` in this repo.
 - Run `docker-compose pull` in this repo.
+- Run `docker-compose run inferno bundle exec rake db:migrate` to set up the
+  database.
 - Run `docker-compose up` in this repo.
 - Navigate to `http://localhost:4567`. The IPS test suite will be available.
