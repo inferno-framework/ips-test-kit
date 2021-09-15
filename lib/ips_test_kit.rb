@@ -31,6 +31,7 @@ module IPS
       group from: :ips_bundle
       group from: :ips_observation_results
       group from: :ips_allergy_intolerance
+      group from: :ips_allergy_intolerance_cross_border
       group from: :ips_practitioner_role
       group from: :ips_observation_pregnancy_status
       group from: :ips_medication_statement
