@@ -1,3 +1,7 @@
+require 'inferno/config/application'
+require 'inferno/utils/migration'
+Inferno::Utils::Migration.new.run
+
 # Hide deprecation warnings
 $VERBOSE = nil
 
