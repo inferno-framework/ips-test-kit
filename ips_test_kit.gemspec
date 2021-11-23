@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
-  spec.name          = 'inferno_ips_test_kit'
-  spec.version       = '0.0.2'
+  spec.name          = 'ips_test_kit'
+  spec.version       = '0.0.3'
   spec.authors       = ['MITRE']
   spec.email         = ['inferno@groups.mitre.org']
   spec.date          = Time.now.utc.strftime('%Y-%m-%d')
