@@ -1,12 +1,12 @@
 Gem::Specification.new do |spec|
-  spec.name          = 'inferno_template'
+  spec.name          = 'inferno_ips_test_kit'
   spec.version       = '0.0.2'
-  spec.authors       = ['Stephen MacVicar']
+  spec.authors       = ['MITRE']
   spec.email         = ['inferno@groups.mitre.org']
   spec.date          = Time.now.utc.strftime('%Y-%m-%d')
-  spec.summary       = 'A template repository for Inferno tests'
-  spec.description   = 'A template repository for Inferno tests'
-  spec.homepage      = 'https://github.com/inferno_community/ips-test-kit'
+  spec.summary       = 'IPS Tests'
+  spec.description   = 'IPS Tests'
+  spec.homepage      = 'https://github.com/inferno-framework/ips-test-kit'
   spec.license       = 'Apache-2.0'
   spec.add_runtime_dependency 'inferno_core', '0.0.5'
   spec.add_development_dependency 'database_cleaner-sequel', '~> 1.8'

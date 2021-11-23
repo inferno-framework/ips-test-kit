@@ -1,4 +1,6 @@
-# Inferno Template
+# Inferno IPS Test Kit
+
+TODO Update with IPS usage instructions (currently from the template repository)
 
 This is a template repository for an
 [Inferno](https://github.com/inferno-community/inferno-core) test kit.
