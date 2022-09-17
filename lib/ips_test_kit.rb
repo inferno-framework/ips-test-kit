@@ -7,6 +7,10 @@ module IPS
 
     id 'ips'
 
+    validator do
+      url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
+    end
+
     # Comment this out to remove
     group from: :ips_resource_validation
 
