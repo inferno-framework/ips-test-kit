@@ -48,6 +48,7 @@ module IPS
       group from: :ips_immunization
       group from: :ips_media_observation
       group from: :ips_medication
+      group from: :ips_medication_request
       group from: :ips_medication_statement
       group  do
         title 'Observation Profiles'
