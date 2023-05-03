@@ -1,6 +1,8 @@
+require_relative 'lib/ips/version'
+
 Gem::Specification.new do |spec|
   spec.name          = 'ips_test_kit'
-  spec.version       = '0.1.0'
+  spec.version       = IPS::VERSION
   spec.authors       = ['MITRE']
   spec.email         = ['inferno@groups.mitre.org']
   spec.date          = Time.now.utc.strftime('%Y-%m-%d')
