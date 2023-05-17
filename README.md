@@ -1,9 +1,15 @@
 # Inferno IPS Test Kit
 
-TODO Update with IPS usage instructions (currently from the template repository)
+The Inferno International Patient Summary Test Kit provides an
+executable set of tests for the [International Patient Summary (IPS)
+Implementation Guide](https://build.fhir.org/ig/HL7/fhir-ips/).  This test kit
+is designed and maintained by the Inferno team to support the development of the
+IPS IG and improve the core Inferno Framework.
 
-This is a template repository for an
-[Inferno](https://github.com/inferno-community/inferno-core) test kit.
+This test kit includes a web interface to run a configured local [HL7® FHIR®
+validator](https://confluence.hl7.org/display/FHIR/Using+the+FHIR+Validator)
+service to validate instances of FHIR resources to the IPS profiles, as well as
+a preliminary test suite.
 
 ## Instructions
 
@@ -64,3 +70,8 @@ Unless required by applicable law or agreed to in writing, software distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
+
+## Trademark Notice
+
+HL7, FHIR and the FHIR [FLAME DESIGN] are the registered trademarks of Health
+Level Seven International and their use does not constitute endorsement by HL7.
