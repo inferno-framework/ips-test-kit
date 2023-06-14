@@ -1,0 +1,348 @@
+{
+    "title": "Preset for International Patient Summary (IPS)",
+    "id": null,
+    "test_suite_id": "ips",
+    "inputs": [
+        {
+            "name": "bundle_content",
+            "value": {
+                "resourceType": "Bundle",
+                "id": "4eaf8ade-1cce-45cc-be1c-e8f02cdbb9c7",
+                "meta": {
+                    "versionId": "1",
+                    "lastUpdated": "2023-06-06T20:04:36.924+00:00",
+                    "source": "#gjovYtdjS7bwM2i1"
+                },
+                "type": "document",
+                "total": 1,
+                "link": [
+                    {
+                        "relation": "self",
+                        "url": "https://vulcano.sispropreprod.gov.co:443/fhir/Composition/687/$document"
+                    }
+                ],
+                "entry": [
+                    {
+                        "fullUrl": "https://vulcano.sispropreprod.gov.co:443/fhir/Composition/687",
+                        "resource": {
+                            "resourceType": "Composition",
+                            "id": "687",
+                            "meta": {
+                                "versionId": "1",
+                                "lastUpdated": "2022-05-25T13:31:28.877+00:00",
+                                "source": "#a2340086fe099a01",
+                                "profile": [
+                                    "https://www.minsalud.gov.co/ihc/fhir/StructureDefinition/CompositionCo"
+                                ]
+                            },
+                            "text": {
+                                "status": "generated",
+                                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource &quot;CompositionColombia&quot; Version &quot;1&quot; Updated &quot;2021-10-13 10:23:44+0000&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-CompositionCo.html\">Documento Co</a></p></div><p><b>status</b>: final</p><p><b>type</b>: Patient Summary Document <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"https://loinc.org/\">LOINC</a>#60591-5)</span></p><p><b>date</b>: 2022-03-05 06:30:00+0100</p><p><b>author</b>: <a href=\"Practitioner-ProfesionalColombia.html\">Practitioner/ProfesionalColombia</a></p><p><b>title</b>: Resumen de Paciente Colombia</p></div>"
+                            },
+                            "status": "final",
+                            "type": {
+                                "coding": [
+                                    {
+                                        "system": "http://loinc.org",
+                                        "code": "60591-5",
+                                        "display": "Patient Summary Document"
+                                    }
+                                ]
+                            },
+                            "subject": {
+                                "reference": "Patient/689"
+                            },
+                            "date": "2022-03-05T18:30:00+01:00",
+                            "author": [
+                                {
+                                    "reference": "https://vulcano.sispropreprod.gov.co/fhir/Practitioner/43242432424"
+                                }
+                            ],
+                            "title": "Resumen de Paciente Colombia",
+                            "custodian": {
+                                "reference": "Organization/583"
+                            },
+                            "section": [
+                                {
+                                    "title": "Condiciones del Paciente",
+                                    "code": {
+                                        "coding": [
+                                            {
+                                                "system": "http://loinc.org",
+                                                "code": "11450-4",
+                                                "display": "Problem list Reported"
+                                            }
+                                        ]
+                                    },
+                                    "text": {
+                                        "status": "generated",
+                                        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CONDICIONES</div>"
+                                    },
+                                    "entry": [
+                                        {
+                                            "reference": "Condition/688"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "search": {
+                            "mode": "match"
+                        }
+                    },
+                    {
+                        "fullUrl": "https://vulcano.sispropreprod.gov.co:443/fhir/Condition/688",
+                        "resource": {
+                            "resourceType": "Condition",
+                            "id": "688",
+                            "meta": {
+                                "versionId": "1",
+                                "lastUpdated": "2022-05-25T13:31:28.877+00:00",
+                                "source": "#a2340086fe099a01",
+                                "profile": [
+                                    "https://www.minsalud.gov.co/ihc/fhir/StructureDefinition/ConditionCo"
+                                ]
+                            },
+                            "text": {
+                                "status": "generated",
+                                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource &quot;ConditionColombia&quot; Version &quot;1&quot; Updated &quot;2022-01-13 10:23:44+0000&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ConditionCo.html\">Condition Co</a></p></div><p><b>code</b>: Type 1 diabetes mellitus : With neurological complications <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/3.1.0/CodeSystem-icd10.html\">ICD-10</a>#E10.4)</span></p><p><b>subject</b>: <a href=\"Patient-PacienteColombiano.html\">Patient/PacienteColombiano</a> &quot; LÓPEZ&quot;</p></div>"
+                            },
+                            "code": {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/sid/icd-10",
+                                        "code": "E10.4",
+                                        "display": "Type 1 diabetes mellitus : With neurological complications"
+                                    }
+                                ]
+                            },
+                            "subject": {
+                                "reference": "Patient/689"
+                            }
+                        },
+                        "search": {
+                            "mode": "include"
+                        }
+                    },
+                    {
+                        "fullUrl": "https://vulcano.sispropreprod.gov.co:443/fhir/Patient/689",
+                        "resource": {
+                            "resourceType": "Patient",
+                            "id": "689",
+                            "meta": {
+                                "versionId": "1",
+                                "lastUpdated": "2022-05-25T13:31:28.877+00:00",
+                                "source": "#a2340086fe099a01",
+                                "profile": [
+                                    "https://www.minsalud.gov.co/ihc/fhir/StructureDefinition/PacienteCo"
+                                ]
+                            },
+                            "text": {
+                                "status": "generated",
+                                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource &quot;PacienteColombianoMinimo&quot; Version &quot;1&quot; Updated &quot;2022-03-08T19:23:44.162-03:00&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-PacienteCo.html\">Paciente Colombiano</a></p></div><p><b>identifier</b>: Cédula ciudadanía: 98765</p><p><b>name</b>: Luis Alberto Sanchez </p><p><b>gender</b>: male</p><p><b>birthDate</b>: 1974-12-25</p></div>"
+                            },
+                            "identifier": [
+                                {
+                                    "type": {
+                                        "extension": [
+                                            {
+                                                "url": "https://www.minsalud.gov.co/ihc/fhir/StructureDefinition/Pais",
+                                                "valueCodeableConcept": {
+                                                    "coding": [
+                                                        {
+                                                            "code": "170"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "coding": [
+                                            {
+                                                "system": "https://www.minsalud.gov.co/ihc/fhir/CodeSystem/ids-personaColombia",
+                                                "code": "CC",
+                                                "display": "Cédula ciudadanía"
+                                            }
+                                        ]
+                                    },
+                                    "value": "98765",
+                                    "assigner": {
+                                        "display": "Registraduria Nacional"
+                                    }
+                                }
+                            ],
+                            "name": [
+                                {
+                                    "family": "Sanchez",
+                                    "_family": {
+                                        "extension": [
+                                            {
+                                                "url": "http://hl7.org/fhir/StructureDefinition/humanname-mothers-family",
+                                                "valueString": "Martinez"
+                                            }
+                                        ]
+                                    },
+                                    "given": [
+                                        "Luis",
+                                        "Alberto"
+                                    ]
+                                }
+                            ],
+                            "gender": "male",
+                            "birthDate": "1974-12-25"
+                        },
+                        "search": {
+                            "mode": "include"
+                        }
+                    }
+                ]
+            },
+            "_title": "IPS Bundle",
+            "_type": "textarea"
+        },
+        {
+            "name": "url",
+            "value": "http://ips.health:8080/fhir",
+            "_type": "text"
+        },
+        {
+            "name": "composition_id",
+            "value": "88310dbf-d532-415e-9507-5f3108a11f83",
+            "_type": "text"
+        },
+        {
+            "name": "patient_id",
+            "value": "6a670b6a-e334-4ec6-a684-0c5ce66a1554",
+            "_type": "text"
+        },
+        {
+            "name": "allergy_intolerance_id",
+            "value": "ab2d7518-d16b-44a5-8930-0fa791ccca75",
+            "_type": "text"
+        },
+        {
+            "name": "bundle_id",
+            "value": "4eaf8ade-1cce-45cc-be1c-e8f02cdbb9c7",
+            "_type": "text"
+        },
+        {
+            "name": "condition_id",
+            "value": "29f1316b-0ad4-429f-95b0-1b61ccfec704",
+            "_type": "text"
+        },
+        {
+            "name": "diagnostic_report_id",
+            "value": "43a65ef2-887a-40cd-ba78-98e60a771a19",
+            "_type": "text"
+        },
+        {
+            "name": "device_id",
+            "value": "baf0a9ca-008d-4136-bd2f-cee6b0e4d6b9",
+            "_type": "text"
+        },
+        {
+            "name": "device_use_statement_id",
+            "value": null,
+            "_type": "text"
+        },
+        {
+            "name": "imaging_study_id",
+            "value": null,
+            "_type": "text"
+        },
+        {
+            "name": "immunization_id",
+            "value": "14e7ccfc-b4a7-4c27-a9a2-0b5ab405ba47",
+            "_type": "text"
+        },
+        {
+            "name": "media_id",
+            "value": null,
+            "_type": "text"
+        },
+        {
+            "name": "medication_id",
+            "value": "4e14cc64-9dc9-4ab5-adc9-25d3bfe75020",
+            "_type": "text"
+        },
+        {
+            "name": "medication_request_id",
+            "value": "5f525db4-1048-426c-9b2b-880a16cfbbbb",
+            "_type": "text"
+        },
+        {
+            "name": "medication_statement_id",
+            "value": "b000ded6-53fd-41a6-9a19-cc228d349ce8",
+            "_type": "text"
+        },
+        {
+            "name": "observation_alcohol_use_id",
+            "value": "bc970c05-d45b-4301-9ab9-d1dab38f2d80",
+            "_type": "text"
+        },
+        {
+            "name": "observation_pregnancy_edd_id",
+            "value": "0b3232c5-0b83-402c-afa7-5bd06fd3fd22",
+            "_type": "text"
+        },
+        {
+            "name": "observation_pregnancy_outcome_id",
+            "value": "e2f4fe9d-8c58-4cb4-b5f5-08323c5332c0",
+            "_type": "text"
+        },
+        {
+            "name": "observation_pregnancy_status_id",
+            "value": "5ea87412-7eb5-4bd9-a23e-e67f83e51801",
+            "_type": "text"
+        },
+        {
+            "name": "observation_tobacco_use_id",
+            "value": "1da8de06-22be-48e0-b742-ca1bc57a05bc",
+            "_type": "text"
+        },
+        {
+            "name": "observation_results_id",
+            "value": "037230ec-4a4f-464a-846c-ca6bc7683f3a",
+            "_type": "text"
+        },
+        {
+            "name": "observation_results_laboratory_id",
+            "value": "0b0982b4-80b5-4dd7-b76b-dde6e4ad4ca7",
+            "_type": "text"
+        },
+        {
+            "name": "observation_results_pathology_id",
+            "value": null,
+            "_type": "text"
+        },
+        {
+            "name": "observation_results_radiology_id",
+            "value": "50f83f8b-6638-4cd9-b05d-120de6bf2bc8",
+            "_type": "text"
+        },
+        {
+            "name": "organization_id",
+            "value": "0efebfab-e8a5-4164-8851-96f58081e7da",
+            "_type": "text"
+        },
+        {
+            "name": "practitioner_id",
+            "value": "87bac67b-a7c7-4e76-9c44-b6c8fbc847bc",
+            "_type": "text"
+        },
+        {
+            "name": "practitioner_role_id",
+            "value": "e628b578-c75e-49de-8663-35879ca59511",
+            "_type": "text"
+        },
+        {
+            "name": "procedure_id",
+            "value": "ba3e448e-9ab8-4274-8128-917d51581b1b",
+            "_type": "text"
+        },
+        {
+            "name": "specimen_id",
+            "value": null,
+            "_type": "text"
+        }
+    ]
+}
