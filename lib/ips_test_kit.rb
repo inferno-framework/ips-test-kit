@@ -6,7 +6,7 @@ module IPS
     description %(
       This test suite evaluates the ability of a system to provide
       patient summary data expressed using HL7® FHIR®
-      in accordance with the [International Patient Summary Implementation Guide (IPA IG)](https://www.hl7.org/fhir/uv/ips/).  
+      in accordance with the [International Patient Summary Implementation Guide (IPS IG)](https://www.hl7.org/fhir/uv/ips/).  
     )
 
     id 'ips'
