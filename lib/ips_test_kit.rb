@@ -3,7 +3,11 @@ Dir.glob(File.join(__dir__, 'ips', '*.rb')).each { |path| require_relative path.
 module IPS
   class Suite < Inferno::TestSuite
     title 'International Patient Summary (IPS)'
-    description 'International Patient Summary (IPS)'
+    description %(
+      This test suite evaluates the ability of a system to provide
+      patient summary data expressed using HL7® FHIR®
+      in accordance with the [International Patient Summary Implementation Guide (IPS IG)](https://www.hl7.org/fhir/uv/ips/).  
+    )
 
     id 'ips'
 
