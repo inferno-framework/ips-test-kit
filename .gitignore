@@ -1,6 +1,9 @@
 /data/*.db
 /data/redis/*.rdb
 /data/redis/*.aof
+data/redis/appendonlydir/*.aof
+data/redis/appendonlydir/*.manifest
+data/redis/appendonlydir/*.rdb
 /tmp
 .env.local
 .env.*.local
