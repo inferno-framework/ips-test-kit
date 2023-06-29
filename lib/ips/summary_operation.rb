@@ -63,8 +63,6 @@ module IPS
         assert resource.entry.length.positive?, 'Bundle has no entries'
 
         entry = resource.entry.first
-        puts "----- ENTRY ------"
-        puts entry
 
         assert entry.resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
         assert_valid_resource(resource: entry, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
