@@ -42,7 +42,7 @@ module IPS
       makes_request :summary_operation
 
       run do
-        fhir_read(:patient, "#{patient_id}/$summary",name: :summary_operation)
+        fhir_read(:patient, "#{patient_id}/$summary", name: :summary_operation)
         assert_response_status(200)
         assert_resource_type(:bundle)
         assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips')
@@ -63,6 +63,8 @@ module IPS
         assert resource.entry.length.positive?, 'Bundle has no entries'
 
         entry = resource.entry.first
+        puts "----- ENTRY ------"
+        puts entry
 
         assert entry.resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
         assert_valid_resource(resource: entry, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
