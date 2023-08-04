@@ -1,5 +1,5 @@
 {
-    "title": "Preset for International Patient Summary (IPS)",
+    "title": "ips.health Reference Server",
     "id": null,
     "test_suite_id": "ips",
     "inputs": [
