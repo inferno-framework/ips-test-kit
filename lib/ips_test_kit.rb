@@ -4,9 +4,10 @@ module IPS
   class Suite < Inferno::TestSuite
     title 'International Patient Summary (IPS)'
     description %(
-      This test suite evaluates the ability of a system to provide
-      patient summary data expressed using HL7® FHIR®
-      in accordance with the [International Patient Summary Implementation Guide (IPS IG)](https://www.hl7.org/fhir/uv/ips/).  
+      This test suite evaluates the ability of a system to provide patient
+      summary data expressed using HL7® FHIR® in accordance with the
+      [International Patient Summary Implementation Guide (IPS
+      IG)](https://www.hl7.org/fhir/uv/ips/).  
     )
 
     id 'ips'
@@ -14,6 +15,21 @@ module IPS
     validator do
       url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
     end
+
+    links [
+      {
+        label: 'Report Issue',
+        url: 'https://github.com/inferno-framework/ips-test-kit/issues/'
+      },
+      {
+        label: 'Open Source',
+        url: 'https://github.com/inferno-framework/ips-test-kit/'
+      },
+      {
+        label: 'International Patient Summary IG v1.0.0',
+        url: 'http://hl7.org/fhir/uv/ips/STU1/'
+      }
+    ]
     
     # Comment this out to remove
     group from: :ips_resource_validation
