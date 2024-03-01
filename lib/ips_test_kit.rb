@@ -23,6 +23,12 @@ module IPS
       For systems that also provide a FHIR API access to the components resources
       of the IPS bundle, use the 'IPS Read Tests'.
 
+      This suite provides two presets:
+      * HL7.org IPS Server: Hosted reference IPS Server.  This is suitable for running
+        the 'Operation' and 'Read' tests.  Resource IDs may not remain valid as this is an
+        open server.
+      * IPS Example Summary Bundle: Populates the 'IPS Resource Validation Test' with an
+        example provided in the IG. 
     )
 
     id 'ips'
