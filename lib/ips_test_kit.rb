@@ -12,8 +12,8 @@ module IPS
       IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).  
 
       Because IPS bundles can be generated and transmitted in many different
-      ways beyond a traditional FHIR Restful server, this test suite allows you
-      to evaluate a single bundle that is not being provided by a server in the
+      ways beyond a traditional FHIR RESTful server, this test suite allows you
+      to optionally evaluate a single bundle that is not being provided by a server in the
       'IPS Resource Validation Tests'.
 
       For systems that support a standard API for generating and communicating
