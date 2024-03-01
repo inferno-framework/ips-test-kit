@@ -42,8 +42,8 @@ module IPS
         url: 'https://github.com/inferno-framework/ips-test-kit/'
       },
       {
-        label: 'International Patient Summary IG v1.0.0',
-        url: 'http://hl7.org/fhir/uv/ips/STU1/'
+        label: 'International Patient Summary IG v1.1.0',
+        url: 'http://hl7.org/fhir/uv/ips/STU1.1/'
       }
     ]
     
