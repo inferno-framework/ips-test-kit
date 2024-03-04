@@ -36,7 +36,7 @@ module IPS
     test do
       title 'IPS Server returns Bundle resource for Patient/[id]/$summary GET operation'
       description %(
-        IPS Server return valid IPS Bundle resource as successful result of
+        IPS Server returns a valid IPS Bundle resource as successful result of
         $summary operation.
 
         This test currently only issues a GET request for the summary due to a
@@ -47,8 +47,8 @@ module IPS
 
         A future update to this test suite should include a required POST
         request as well as an optional GET request for this content.
-
       )
+
       input :patient_id
       makes_request :summary_operation
 
