@@ -5,7 +5,7 @@
     "inputs": [
         {
             "name": "url",
-            "value": "https://hl7-ips-server.hl7.org/fhir/",
+            "value": "https://hl7-ips-server.hl7.org/fhir",
             "_type": "text"
         },
         {
