@@ -1,16 +1,38 @@
 Dir.glob(File.join(__dir__, 'ips', '*.rb')).each { |path| require_relative path.delete_prefix("#{__dir__}/") }
+require_relative 'ips/version'
 
 module IPS
   class Suite < Inferno::TestSuite
-    title 'International Patient Summary (IPS)'
+    title 'International Patient Summary (IPS) v1.1.0'
+    short_title 'IPS v1.1.0'
     description %(
       This test suite evaluates the ability of a system to provide patient
       summary data expressed using HL7® FHIR® in accordance with the
       [International Patient Summary Implementation Guide (IPS
-      IG)](https://www.hl7.org/fhir/uv/ips/).  
+      IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).  
+
+      Because IPS bundles can be generated and transmitted in many different
+      ways beyond a traditional FHIR RESTful server, this test suite allows you
+      to optionally evaluate a single bundle that is not being provided by a server in the
+      'IPS Resource Validation Tests'.
+
+      For systems that support a standard API for generating and communicating
+      these bundles in accordance with the guidance provided in the IG, use the
+      'IPS Operation Tests'.
+
+      For systems that also provide a FHIR API access to the components resources
+      of the IPS bundle, use the 'IPS Read Tests'.
+
+      This suite provides two presets:
+      * HL7.org IPS Server: Hosted reference IPS Server.  This is suitable for running
+        the 'Operation' and 'Read' tests.  Resource IDs may not remain valid as this is an
+        open server.
+      * IPS Example Summary Bundle: Populates the 'IPS Resource Validation Test' with an
+        example provided in the IG. 
     )
 
     id 'ips'
+    version IPS::VERSION
 
     validator do
       url ENV.fetch('VALIDATOR_URL', 'http://validator_service:4567')
@@ -26,8 +48,8 @@ module IPS
         url: 'https://github.com/inferno-framework/ips-test-kit/'
       },
       {
-        label: 'International Patient Summary IG v1.0.0',
-        url: 'http://hl7.org/fhir/uv/ips/STU1/'
+        label: 'International Patient Summary IG v1.1.0',
+        url: 'http://hl7.org/fhir/uv/ips/STU1.1/'
       }
     ]
     
@@ -35,22 +57,33 @@ module IPS
     group from: :ips_resource_validation
 
     group do
-      title 'IPS Operations'
+      title 'IPS Server Operations for Generating IPS Bundles Tests'
+      short_title 'IPS Operation Tests'
+      description %(
+        This group evaluates the ability of systems to provide a standard FHIR
+        API for generating and communicating an IPS Bundle as described in the
+        [IPS Data Generation and Inclusion Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
 
-      input :url
+        Please note that the DocRef tests are currently of limited scope.
+      )
+
+
+      input :url, title: 'IPS FHIR Server Base URL'
 
       fhir_client do
         url :url
       end
 
-      group from: :ips_document_operation
       group from: :ips_summary_operation
+      group from: :ips_docref_operation
     end
 
     group do
-      title 'IPS Read and Validate Profiles'
+      title 'IPS Server Read and Validate Profiles Tests'
+      short_title 'IPS Read Tests'
+      optional
 
-      input :url
+      input :url, title: 'IPS FHIR Server Base URL'
 
       fhir_client do
         url :url

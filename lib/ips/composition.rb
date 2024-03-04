@@ -37,46 +37,5 @@ module IPS
       end
     end
 
-    test do
-      title 'Server returns a fully bundled document from a Composition resource'
-      description %(
-        This test will perform the $document operation on the chosen composition resource with the persist option on.
-        It will verify that all referenced resources in the composition are in the document bundle and that we are able to retrieve the bundle after it's generated.
-      )
-      # link 'https://www.hl7.org/fhir/composition-operation-document.html'
-      uses_request :composition
-
-      run do
-        skip_if resource.blank?, 'No resource found from Read test'
-        composition = resource
-        references_in_composition = []
-        walk_resource(composition) do |value, meta, _path|
-          next if meta['type'] != 'Reference'
-          next if value.reference.blank?
-
-          references_in_composition << value
-        end
-
-        fhir_client.get("Composition/#{resource.id}/$document?persist=true")
-        assert_response_status(200)
-        assert_resource_type(:bundle)
-
-        bundled_resources = resource.entry.map(&:resource)
-        missing_resources =
-          references_in_composition
-            .select(&:relative?)
-            .select do |reference|
-              resource_class = reference.resource_class
-              resource_id = reference.reference.split('/').last
-              bundled_resources.none? do |resource|
-                resource.instance_of?(resource_class) && resource.id == resource_id
-              end
-            end
-
-        assert missing_resources.empty?,
-               'The following resources were missing in the response from the document' \
-               "operation: #{missing_resources.map(&:to_s).join(',')}"
-      end
-    end
   end
 end

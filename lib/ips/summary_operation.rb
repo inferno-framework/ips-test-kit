@@ -1,15 +1,18 @@
 module IPS
   class SummaryOperation < Inferno::TestGroup
-    title 'Summary Operation (IPS) Tests'
-    description 'Verify support for the $summary operation required by the Specimen (IPS) profile.'
+    title 'Summary Operation Tests'
+    description %(
+        Verify support for the $summary operation as as described in the [IPS
+        Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+    )
     id :ips_summary_operation
+    run_as_group
 
     test do
       title 'IPS Server declares support for $summary operation in CapabilityStatement'
       description %(
-        The IPS Server SHALL declare support for Patient/[id]/$summary operation in its server CapabilityStatement
+        The IPS Server declares support for Patient/[id]/$summary operation in its server CapabilityStatement
       )
-      # link 'http://build.fhir.org/ig/HL7/fhir-ips/index.html'
 
       run do
         fhir_get_capability_statement
@@ -17,32 +20,34 @@ module IPS
 
         operations = resource.rest&.flat_map do |rest|
           rest.resource
-            &.select { |r| r.type == 'Composition' && r.respond_to?(:operation) }
+            &.select { |r| r.type == 'Patient' && r.respond_to?(:operation) }
             &.flat_map(&:operation)
         end&.compact
 
         operation_defined = operations.any? do |operation|
-          operation.definition == 'http://hl7.org/fhir/OperationDefinition/Patient-summary' ||
+          operation.definition == 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary' ||
             ['summary', 'patient-summary'].include?(operation.name.downcase)
         end
 
-        assert operation_defined, 'Server CapabilityStatement did not declare support for $summary operation in Composition resource.'
+        assert operation_defined, 'Server CapabilityStatement did not declare support for $summary operation in Patient resource.'
       end
     end
 
     test do
       title 'IPS Server returns Bundle resource for Patient/id/$summary operation'
       description %(
-        IPS Server return valid IPS Bundle resource as successful result of $summary operation
+        IPS Server return valid IPS Bundle resource as successful result of $summary operation.
 
-        POST [base]/Patient/id/$summary
+        This is required to be a POST per the [guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html):
+
+        >  This operation returns an IPS document Bundle in response to a POST request.
+
       )
-      # link 'http://build.fhir.org/ig/HL7/fhir-ips/index.html'
       input :patient_id
       makes_request :summary_operation
 
       run do
-        fhir_operation("Patient/#{patient_id}/$summary", name: :summary_operation)
+        fhir_operation("Patient/#{patient_id}/$summary", name: :summary_operation, operation_method: :post)
         assert_response_status(200)
         assert_resource_type(:bundle)
         assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips')
@@ -62,10 +67,10 @@ module IPS
 
         assert resource.entry.length.positive?, 'Bundle has no entries'
 
-        entry = resource.entry.first
+        first_resource = resource.entry.first.resource
 
-        assert entry.resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
-        assert_valid_resource(resource: entry, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
+        assert first_resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
+        assert_valid_resource(resource: first_resource, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
       end
     end
 
