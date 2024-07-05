@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ips_test_kit (0.10.0)
+    ips_test_kit (0.10.1)
       inferno_core (>= 0.4.37)
 
 GEM
