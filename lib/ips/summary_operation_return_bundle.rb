@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module IPS
-  class SummaryOperationReturnBundle< Inferno::Test
+  class SummaryOperationReturnBundle < Inferno::Test
     title 'IPS Server returns Bundle resource for Patient/[id]/$summary GET operation'
     description %(
       IPS Server returns a valid IPS Bundle resource as successful result of
@@ -19,11 +21,17 @@ module IPS
     input :patient_id
     makes_request :summary_operation
 
+    class << self
+      def profile_url
+        @profile_url ||= config.options[:profile_url]
+      end
+    end
+
     run do
       fhir_operation("Patient/#{patient_id}/$summary", name: :summary_operation, operation_method: :get)
       assert_response_status(200)
       assert_resource_type(:bundle)
-      assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips')
+      assert_valid_resource(profile_url: self.class.profile_url)
     end
   end
 end

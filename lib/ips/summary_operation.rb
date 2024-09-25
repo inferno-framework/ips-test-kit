@@ -10,9 +10,19 @@ module IPS
     id :ips_summary_operation
     run_as_group
 
-    test from: :ips_summary_operation_support_operation
+    test from: :ips_summary_operation_support_operation,
+         config: {
+           options: {
+             ips_summary_operation_definition_url: 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary'
+           }
+         }
 
-    test from: :ips_summary_operation_return_bundle
+    test from: :ips_summary_operation_return_bundle,
+         config: {
+           options: {
+             profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips'
+           }
+         }
 
     test do
       title 'IPS Server returns Bundle resource containing valid IPS Composition entry'

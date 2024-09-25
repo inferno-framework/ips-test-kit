@@ -8,6 +8,12 @@ module IPS
     )
     id :ips_summary_operation_support_operation
 
+    class << self
+      def ips_summary_operation_definition_url
+        @ips_summary_operation_definition_url ||= config.options[:ips_summary_operation_definition_url]
+      end
+    end
+
     run do
       fhir_get_capability_statement
       assert_response_status(200)
@@ -19,7 +25,7 @@ module IPS
       end&.compact
 
       operation_defined = operations.any? do |operation|
-        operation.definition == 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary' ||
+        operation.definition == self.class.ips_summary_operation_definition_url ||
           %w[summary patient-summary].include?(operation.name.downcase)
       end
 
