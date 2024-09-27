@@ -1,5 +1,6 @@
 require_relative './summary_operation_return_bundle'
 require_relative './summary_operation_support_operation'
+require_relative './summary_operation_valid_composition'
 module IPS
   class SummaryOperation < Inferno::TestGroup
     title 'Summary Operation Tests'
@@ -24,25 +25,12 @@ module IPS
            }
          }
 
-    test do
-      title 'IPS Server returns Bundle resource containing valid IPS Composition entry'
-      description %(
-        IPS Server return valid IPS Composition resource in the Bundle as first entry
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-Composition-uv-ips.html'
-      uses_request :summary_operation
-
-      run do
-        skip_if !resource.is_a?(FHIR::Bundle), 'No Bundle returned from document operation'
-
-        assert resource.entry.length.positive?, 'Bundle has no entries'
-
-        first_resource = resource.entry.first.resource
-
-        assert first_resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
-        assert_valid_resource(resource: first_resource, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
-      end
-    end
+    test from: :ips_summary_operation_valid_composition,
+         config: {
+           options: {
+             profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips'
+           }
+         }
 
     test do
       title 'IPS Server returns Bundle resource containing valid IPS MedicationStatement entry'
