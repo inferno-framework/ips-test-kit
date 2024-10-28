@@ -1,3 +1,6 @@
+require_relative './summary_operation_return_bundle'
+require_relative './summary_operation_support'
+require_relative './summary_operation_valid_composition'
 module IPS
   class SummaryOperation < Inferno::TestGroup
     title 'Summary Operation Tests'
@@ -8,77 +11,11 @@ module IPS
     id :ips_summary_operation
     run_as_group
 
-    test do
-      title 'IPS Server declares support for $summary operation in CapabilityStatement'
-      description %(
-        The IPS Server declares support for Patient/[id]/$summary operation in its server CapabilityStatement
-      )
+    test from: :ips_summary_operation_support
 
-      run do
-        fhir_get_capability_statement
-        assert_response_status(200)
+    test from: :ips_summary_operation_return_bundle
 
-        operations = resource.rest&.flat_map do |rest|
-          rest.resource
-            &.select { |r| r.type == 'Patient' && r.respond_to?(:operation) }
-            &.flat_map(&:operation)
-        end&.compact
-
-        operation_defined = operations.any? do |operation|
-          operation.definition == 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary' ||
-            ['summary', 'patient-summary'].include?(operation.name.downcase)
-        end
-
-        assert operation_defined, 'Server CapabilityStatement did not declare support for $summary operation in Patient resource.'
-      end
-    end
-
-    test do
-      title 'IPS Server returns Bundle resource for Patient/[id]/$summary GET operation'
-      description %(
-        IPS Server returns a valid IPS Bundle resource as successful result of
-        $summary operation.
-
-        This test currently only issues a GET request for the summary due to a
-        limitation in Inferno in issuing POST requests that omit a Content-Type
-        header when the body is empty. Inferno currently adds a `Content-Type:
-        application/x-www-form-urlencoded` header when issuing a POST with no
-        body, which causes issues in known reference implementations.
-
-        A future update to this test suite should include a required POST
-        request as well as an optional GET request for this content.
-      )
-
-      input :patient_id
-      makes_request :summary_operation
-
-      run do
-        fhir_operation("Patient/#{patient_id}/$summary", name: :summary_operation, operation_method: :get)
-        assert_response_status(200)
-        assert_resource_type(:bundle)
-        assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips')
-      end
-    end
-
-    test do
-      title 'IPS Server returns Bundle resource containing valid IPS Composition entry'
-      description %(
-        IPS Server return valid IPS Composition resource in the Bundle as first entry
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-Composition-uv-ips.html'
-      uses_request :summary_operation
-
-      run do
-        skip_if !resource.is_a?(FHIR::Bundle), 'No Bundle returned from document operation'
-
-        assert resource.entry.length.positive?, 'Bundle has no entries'
-
-        first_resource = resource.entry.first.resource
-
-        assert first_resource.is_a?(FHIR::Composition), 'The first entry in the Bundle is not a Composition'
-        assert_valid_resource(resource: first_resource, profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
-      end
-    end
+    test from: :ips_summary_operation_valid_composition
 
     test do
       title 'IPS Server returns Bundle resource containing valid IPS MedicationStatement entry'
