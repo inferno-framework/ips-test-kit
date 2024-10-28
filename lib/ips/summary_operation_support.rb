@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module IPS
-  class SummaryOperationSupportOperation < Inferno::Test
+  class SummaryOperationSupport < Inferno::Test
     title 'IPS Server declares support for $summary operation in CapabilityStatement'
     description %(
       The IPS Server declares support for Patient/[id]/$summary operation in its server CapabilityStatement
     )
-    id :ips_summary_operation_support_operation
+    id :ips_summary_operation_support
 
     class << self
       def ips_summary_operation_definition_url
-        @ips_summary_operation_definition_url ||= config.options[:ips_summary_operation_definition_url]
+        @ips_summary_operation_definition_url ||= config.options[:ips_summary_operation_definition_url] || 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary'
       end
     end
 

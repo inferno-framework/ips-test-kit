@@ -1,5 +1,5 @@
 require_relative './summary_operation_return_bundle'
-require_relative './summary_operation_support_operation'
+require_relative './summary_operation_support'
 require_relative './summary_operation_valid_composition'
 module IPS
   class SummaryOperation < Inferno::TestGroup
@@ -11,26 +11,11 @@ module IPS
     id :ips_summary_operation
     run_as_group
 
-    test from: :ips_summary_operation_support_operation,
-         config: {
-           options: {
-             ips_summary_operation_definition_url: 'http://hl7.org/fhir/uv/ips/OperationDefinition/summary'
-           }
-         }
+    test from: :ips_summary_operation_support
 
-    test from: :ips_summary_operation_return_bundle,
-         config: {
-           options: {
-             profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips'
-           }
-         }
+    test from: :ips_summary_operation_return_bundle
 
-    test from: :ips_summary_operation_valid_composition,
-         config: {
-           options: {
-             profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips'
-           }
-         }
+    test from: :ips_summary_operation_valid_composition
 
     test do
       title 'IPS Server returns Bundle resource containing valid IPS MedicationStatement entry'

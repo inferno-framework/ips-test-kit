@@ -23,7 +23,7 @@ module IPS
 
     class << self
       def profile_url
-        @profile_url ||= config.options[:profile_url]
+        @profile_url ||= config.options[:ips_bundle_profile_url] || 'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips'
       end
     end
 

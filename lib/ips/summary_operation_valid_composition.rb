@@ -9,7 +9,7 @@ module IPS
 
     class << self
       def profile_url
-        @profile_url ||= config.options[:profile_url]
+        @profile_url ||= config.options[:ips_composition_profile_url] || 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips'
       end
     end
 
