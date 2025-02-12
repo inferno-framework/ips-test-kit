@@ -1,5 +1,5 @@
 Dir.glob(File.join(__dir__, 'ips', '*.rb')).each { |path| require_relative path.delete_prefix("#{__dir__}/") }
-require_relative 'ips/version'
+require_relative 'ips/metadata'
 
 module IPS
   class Suite < Inferno::TestSuite
@@ -9,7 +9,7 @@ module IPS
       This test suite evaluates the ability of a system to provide patient
       summary data expressed using HL7® FHIR® in accordance with the
       [International Patient Summary Implementation Guide (IPS
-      IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).  
+      IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).
 
       Because IPS bundles can be generated and transmitted in many different
       ways beyond a traditional FHIR RESTful server, this test suite allows you
@@ -28,11 +28,10 @@ module IPS
         the 'Operation' and 'Read' tests.  Resource IDs may not remain valid as this is an
         open server.
       * IPS Example Summary Bundle: Populates the 'IPS Resource Validation Test' with an
-        example provided in the IG. 
+        example provided in the IG.
     )
 
     id 'ips'
-    version IPS::VERSION
 
     VALIDATION_MESSAGE_FILTERS = [
       /\A\S+: \S+: URL value '.*' does not resolve/
@@ -56,11 +55,15 @@ module IPS
         url: 'https://github.com/inferno-framework/ips-test-kit/'
       },
       {
+        label: 'Download',
+        url: 'https://github.com/inferno-framework/ips-test-kit/releases'
+      },
+      {
         label: 'International Patient Summary IG v1.1.0',
         url: 'http://hl7.org/fhir/uv/ips/STU1.1/'
       }
     ]
-    
+
     # Comment this out to remove
     group from: :ips_resource_validation
 
