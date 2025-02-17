@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ips_test_kit (0.10.2)
+    ips_test_kit (0.11.0)
       inferno_core (>= 0.6.2)
 
 GEM
@@ -132,7 +132,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    inferno_core (0.6.2)
+    inferno_core (0.6.3)
       activesupport (~> 6.1.7.5)
       base62-rb (= 0.3.1)
       blueprinter (= 0.25.2)
@@ -168,7 +168,7 @@ GEM
       base64
     kramdown (2.5.1)
       rexml (>= 3.3.9)
-    logger (1.6.5)
+    logger (1.6.6)
     method_source (1.1.0)
     mime-types (3.6.0)
       logger
