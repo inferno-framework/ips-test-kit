@@ -1,17 +1,30 @@
 module IPS
   class MedicationRequest < Inferno::TestGroup
     title 'MedicationRequest (IPS) Tests'
-    description 'Verify support for the server capabilities required by the MedicationRequest (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the MedicationRequest (IPS) profile.
+      These tests focus on validating the server's ability to handle MedicationRequest resources that
+      represent medication prescriptions according to the IPS Implementation Guide.
+    )
     id :ips_medication_request
 
-    test do
-      title 'Server returns correct MedicationRequest resource from the MedicationRequest read interaction'
-      description %(
-        This test will verify that MedicationRequest resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/MedicationRequest-uv-ips'
+    link 'MedicationRequest (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationRequest-uv-ips'
 
-      input :medication_request_id
+    test do
+      title 'Server supports reading MedicationRequest resources'
+      description %(
+        This test verifies that MedicationRequest resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches MedicationRequest
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :medication_request_id,
+            title: 'MedicationRequest ID',
+            description: 'ID of an existing MedicationRequest resource on the server that represents a medication prescription'
       makes_request :medication_request
 
       run do
@@ -25,11 +38,17 @@ module IPS
     end
 
     test do
-      title 'Server returns MedicationRequest resource that matches the MedicationRequest (IPS) profile'
+      title 'MedicationRequest resources conform to IPS profile'
       description %(
-        This test will validate that the MedicationRequest resource returned from the server matches the MedicationRequest (IPS) profile.
+        This test validates that the MedicationRequest resource returned from the server
+        conforms to the [MedicationRequest (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationRequest-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must have an intent
+        * Must have a medication code or reference
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/MedicationRequest-uv-ips'
       uses_request :medication_request
 
       run do

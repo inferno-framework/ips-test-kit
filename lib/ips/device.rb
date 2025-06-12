@@ -1,17 +1,30 @@
 module IPS
   class Device < Inferno::TestGroup
     title 'Device (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Device (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Device (IPS) profile.
+      These tests focus on validating the server's ability to handle Device resources that
+      represent medical devices according to the IPS Implementation Guide.
+    )
     id :ips_device
 
-    test do
-      title 'Server returns correct Device resource from the Device read interaction'
-      description %(
-        This test will verify that Device resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Device-uv-ips'
+    link 'Device (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-uv-ips'
 
-      input :device_id
+    test do
+      title 'Server supports reading Device resources'
+      description %(
+        This test verifies that Device resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Device
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :device_id,
+            title: 'Device ID',
+            description: 'ID of an existing Device resource on the server that represents a medical device'
       makes_request :device
 
       run do
@@ -25,11 +38,14 @@ module IPS
     end
 
     test do
-      title 'Server returns Device resource that matches the Device (IPS) profile'
+      title 'Device resources conform to IPS profile'
       description %(
-        This test will validate that the Device resource returned from the server matches the Device (IPS) profile.
+        This test validates that the Device resource returned from the server
+        conforms to the [Device (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Device-uv-ips'
       uses_request :device
 
       run do

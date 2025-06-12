@@ -1,17 +1,30 @@
 module IPS
   class PractitionerRole < Inferno::TestGroup
     title 'PractitionerRole (IPS) Tests'
-    description 'Verify support for the server capabilities required by the PractitionerRole (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the PractitionerRole (IPS) profile.
+      These tests focus on validating the server's ability to handle PractitionerRole resources that
+      represent healthcare provider roles and responsibilities according to the IPS Implementation Guide.
+    )
     id :ips_practitioner_role
 
-    test do
-      title 'Server returns correct PractitionerRole resource from the PractitionerRole read interaction'
-      description %(
-        This test will verify that PractitionerRole resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/PractitionerRole-uv-ips'
+    link 'PractitionerRole (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/PractitionerRole-uv-ips'
 
-      input :practitioner_role_id
+    test do
+      title 'Server supports reading PractitionerRole resources'
+      description %(
+        This test verifies that PractitionerRole resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches PractitionerRole
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :practitioner_role_id,
+            title: 'PractitionerRole ID',
+            description: 'ID of an existing PractitionerRole resource on the server that represents a healthcare provider role'
       makes_request :practitioner_role
 
       run do
@@ -25,11 +38,12 @@ module IPS
     end
 
     test do
-      title 'Server returns PractitionerRole resource that matches the PractitionerRole (IPS) profile'
+      title 'PractitionerRole resources conform to IPS profile'
       description %(
-        This test will validate that the PractitionerRole resource returned from the server matches the PractitionerRole (IPS) profile.
+        This test validates that the PractitionerRole resource returned from the server
+        conforms to the [PractitionerRole (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/PractitionerRole-uv-ips).
+
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/PractitionerRole-uv-ips'
       uses_request :practitioner_role
 
       run do

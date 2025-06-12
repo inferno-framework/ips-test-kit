@@ -1,17 +1,30 @@
 module IPS
   class Medication < Inferno::TestGroup
     title 'Medication (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Medication (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Medication (IPS) profile.
+      These tests focus on validating the server's ability to handle Medication resources that
+      represent medications according to the IPS Implementation Guide.
+    )
     id :ips_medication
 
-    test do
-      title 'Server returns correct Medication resource from the Medication read interaction'
-      description %(
-        This test will verify that Medication resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Medication-uv-ips'
+    link 'Medication (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Medication-uv-ips'
 
-      input :medication_id
+    test do
+      title 'Server supports reading Medication resources'
+      description %(
+        This test verifies that Medication resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Medication
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :medication_id,
+            title: 'Medication ID',
+            description: 'ID of an existing Medication resource on the server that represents a medication'
       makes_request :medication
 
       run do
@@ -25,11 +38,14 @@ module IPS
     end
 
     test do
-      title 'Server returns Medication resource that matches the Medication (IPS) profile'
+      title 'Medication resources conform to IPS profile'
       description %(
-        This test will validate that the Medication resource returned from the server matches the Medication (IPS) profile.
+        This test validates that the Medication resource returned from the server
+        conforms to the [Medication (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Medication-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a code identifying the medication
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Medication-uv-ips'
       uses_request :medication
 
       run do

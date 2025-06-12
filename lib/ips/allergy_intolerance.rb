@@ -1,17 +1,34 @@
 module IPS
   class AllergyIntolerance < Inferno::TestGroup
     title 'Allergy Intolerance (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Allergy Intolerance (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Allergy Intolerance (IPS) profile.
+      These tests focus on validating the server's ability to handle AllergyIntolerance resources
+      according to the International Patient Summary Implementation Guide requirements.
+    )
     id :ips_allergy_intolerance
+    
+    link 'AllergyIntolerance (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips'
 
     test do
-      title 'Server returns correct AllergyIntolerance resource from the AllergyIntolerance read interaction'
+      title 'Server supports reading AllergyIntolerance resources'
       description %(
-        This test will verify that AllergyIntolerance resources can be read from the server.
+        This test verifies that AllergyIntolerance resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches AllergyIntolerance
+        3. The returned resource ID matches the requested ID
+        
+        [IPS Server CapabilityStatement](http://hl7.org/fhir/uv/ips/CapabilityStatement/ips-server)
+        requires servers to support the read interaction for AllergyIntolerance resources.
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips'
-
-      input :allergy_intolerance_id
+      
+      input :allergy_intolerance_id,
+            title: 'AllergyIntolerance ID',
+            description: 'ID of an existing AllergyIntolerance resource on the server'
+      
       makes_request :allergy_intolerance
 
       run do
@@ -25,11 +42,19 @@ module IPS
     end
 
     test do
-      title 'Server returns AllergyIntolerance resource that matches the Allergy Intolerance (IPS) profile'
+      title 'AllergyIntolerance resources conform to IPS profile'
       description %(
-        This test will validate that the AllergyIntolerance resource returned from the server matches the Allergy Intolerance (IPS) profile.
+        This test validates that the AllergyIntolerance resource returned from the server
+        conforms to the [AllergyIntolerance (IPS) profile](http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips).
+        
+        Profile requirements include:
+        * Must support required elements defined in the profile
+        * Must use required value sets and coding systems
+        * Must conform to profile constraints on data types and cardinalities
+        
+        For detailed requirements, refer to the [AllergyIntolerance (IPS) profile](http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips).
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips'
+      
       uses_request :allergy_intolerance
 
       run do

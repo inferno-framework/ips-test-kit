@@ -1,17 +1,30 @@
 module IPS
   class Practitioner < Inferno::TestGroup
     title 'Practitioner (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Practitioner (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Practitioner (IPS) profile.
+      These tests focus on validating the server's ability to handle Practitioner resources that
+      represent healthcare providers according to the IPS Implementation Guide.
+    )
     id :ips_practitioner
 
-    test do
-      title 'Server returns correct Practitioner resource from the Practitioner read interaction'
-      description %(
-        This test will verify that Practitioner resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Practitioner-uv-ips'
+    link 'Practitioner (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Practitioner-uv-ips'
 
-      input :practitioner_id
+    test do
+      title 'Server supports reading Practitioner resources'
+      description %(
+        This test verifies that Practitioner resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Practitioner
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :practitioner_id,
+            title: 'Practitioner ID',
+            description: 'ID of an existing Practitioner resource on the server that represents a healthcare provider'
       makes_request :practitioner
 
       run do
@@ -25,11 +38,14 @@ module IPS
     end
 
     test do
-      title 'Server returns Practitioner resource that matches the Practitioner (IPS) profile'
+      title 'Practitioner resources conform to IPS profile'
       description %(
-        This test will validate that the Practitioner resource returned from the server matches the Practitioner (IPS) profile.
+        This test validates that the Practitioner resource returned from the server
+        conforms to the [Practitioner (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Practitioner-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a name
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Practitioner-uv-ips'
       uses_request :practitioner
 
       run do

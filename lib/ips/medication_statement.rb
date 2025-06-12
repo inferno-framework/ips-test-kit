@@ -1,17 +1,30 @@
 module IPS
   class MedicationStatement < Inferno::TestGroup
     title 'Medication Statement (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Medication Statement (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Medication Statement (IPS) profile.
+      These tests focus on validating the server's ability to handle MedicationStatement resources that
+      represent a patient's reported medication use according to the IPS Implementation Guide.
+    )
     id :ips_medication_statement
 
-    input :medication_statement_id
+    link 'Medication Statement (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationStatement-uv-ips'
+
+    input :medication_statement_id,
+          title: 'MedicationStatement ID',
+          description: 'ID of an existing MedicationStatement resource on the server that represents a patient\'s reported medication use'
 
     test do
-      title 'Server returns correct MedicationStatement resource from the MedicationStatement read interaction'
+      title 'Server supports reading MedicationStatement resources'
       description %(
-        This test will verify that MedicationStatement resources can be read from the server.
+        This test verifies that MedicationStatement resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches MedicationStatement
+        3. The returned resource ID matches the requested ID
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/MedicationStatement-uv-ips'
       makes_request :medication_statement
 
       run do
@@ -25,11 +38,17 @@ module IPS
     end
 
     test do
-      title 'Server returns MedicationStatement resource that matches the Medication Statement (IPS) profile'
+      title 'MedicationStatement resources conform to IPS profile'
       description %(
-        This test will validate that the MedicationStatement resource returned from the server matches the Medication Statement (IPS) profile.
+        This test validates that the MedicationStatement resource returned from the server
+        conforms to the [Medication Statement (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationStatement-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must have a medication code or reference
+        * Must have an effective time
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/MedicationStatement-uv-ips'
       uses_request :medication_statement
 
       run do

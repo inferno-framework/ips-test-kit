@@ -1,17 +1,30 @@
 module IPS
   class ImagingStudy < Inferno::TestGroup
     title 'Imaging Study (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Imaging Study (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Imaging Study (IPS) profile.
+      These tests focus on validating the server's ability to handle ImagingStudy resources that
+      represent imaging procedures according to the IPS Implementation Guide.
+    )
     id :ips_imaging_study
 
-    test do
-      title 'Server returns correct ImagingStudy resource from the ImagingStudy read interaction'
-      description %(
-        This test will verify that ImagingStudy resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/ImagingStudy-uv-ips'
+    link 'Imaging Study (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/ImagingStudy-uv-ips'
 
-      input :imaging_study_id
+    test do
+      title 'Server supports reading Imaging Study resources'
+      description %(
+        This test verifies that ImagingStudy resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches ImagingStudy
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :imaging_study_id,
+            title: 'Imaging Study ID',
+            description: 'ID of an existing ImagingStudy resource on the server that represents an imaging procedure'
       makes_request :imaging_study
 
       run do
@@ -25,11 +38,15 @@ module IPS
     end
 
     test do
-      title 'Server returns ImagingStudy resource that matches the Imaging Study (IPS) profile'
+      title 'Imaging Study resources conform to IPS profile'
       description %(
-        This test will validate that the ImagingStudy resource returned from the server matches the Imaging Study (IPS) profile.
+        This test validates that the ImagingStudy resource returned from the server
+        conforms to the [Imaging Study (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/ImagingStudy-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/ImagingStudy-uv-ips'
       uses_request :imaging_study
 
       run do

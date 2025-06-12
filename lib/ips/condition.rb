@@ -1,17 +1,30 @@
 module IPS
   class Condition < Inferno::TestGroup
     title 'Condition (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Condition (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Condition (IPS) profile.
+      These tests focus on validating the server's ability to handle Condition resources that
+      represent problems and diagnoses according to the IPS Implementation Guide.
+    )
     id :ips_condition
 
-    test do
-      title 'Server returns correct Condition resource from the Condition read interaction'
-      description %(
-        This test will verify that Condition resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips'
+    link 'Condition (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Condition-uv-ips'
 
-      input :condition_id
+    test do
+      title 'Server supports reading Condition resources'
+      description %(
+        This test verifies that Condition resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Condition
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :condition_id,
+            title: 'Condition ID',
+            description: 'ID of an existing Condition resource on the server that represents a problem or diagnosis'
       makes_request :condition
 
       run do
@@ -25,11 +38,16 @@ module IPS
     end
 
     test do
-      title 'Server returns Condition resource that matches the Condition (IPS) profile'
+      title 'Condition resources conform to IPS profile'
       description %(
-        This test will validate that the Condition resource returned from the server matches the Condition (IPS) profile.
+        This test validates that the Condition resource returned from the server
+        conforms to the [Condition (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Condition-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a code identifying the condition
+        * Must include a clinical status
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips'
       uses_request :condition
 
       run do

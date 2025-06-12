@@ -1,15 +1,30 @@
 module IPS
   class ObservationPregnancyEDD < Inferno::TestGroup
     title 'Observation (Pregnancy: EDD) Tests'
-    description 'Verify support for the server capabilities required by the Observation (Pregnancy: EDD) profile.'
+    description %(
+      Verify support for the server capabilities required by the Observation (Pregnancy: EDD) profile.
+      These tests focus on validating the server's ability to handle Observation resources that
+      represent estimated delivery dates according to the IPS Implementation Guide.
+    )
     id :ips_observation_pregnancy_edd
 
+    link 'Observation (Pregnancy: EDD) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-edd-uv-ips'
+
+    input :observation_pregnancy_edd_id,
+          title: 'Pregnancy EDD Observation ID',
+          description: 'ID of an existing Observation resource on the server that represents an estimated delivery date'
+
     test do
-      title 'Server returns correct Observation resource from the Observation read interaction'
+      title 'Server supports reading Pregnancy EDD Observation resources'
       description %(
-        This test will verify that Observation resources can be read from the server.
+        This test verifies that Observation resources containing estimated delivery dates can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Observation
+        3. The returned resource ID matches the requested ID
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-pregnancy-edd-uv-ips'
 
       input :observation_pregnancy_edd_id
       makes_request :observation_pregnancy_edd
@@ -25,11 +40,17 @@ module IPS
     end
 
     test do
-      title 'Server returns Observation resource that matches the Observation (Pregnancy: EDD) profile'
+      title 'Pregnancy EDD Observation resources conform to IPS profile'
       description %(
-        This test will validate that the Observation resource returned from the server matches the Observation (Pregnancy: EDD) profile.
+        This test validates that the Observation resource returned from the server
+        conforms to the [Observation (Pregnancy: EDD) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-edd-uv-ips).
+        
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must have a code identifying this as an EDD observation
+        * Must include a dateTime value for the estimated delivery date
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-pregnancy-edd-uv-ips'
       uses_request :observation_pregnancy_edd
 
       run do

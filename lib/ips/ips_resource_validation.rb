@@ -3,25 +3,35 @@ module IPS
     title 'IPS Resource Validation Tests'
     id :ips_resource_validation
     description %(
-      This group performs content validation, which is useful for evaluating
-      conformance of systems that produce IPS bundles but do not generate
-      content using a FHIR interface as described in the [IPS
-      Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+      This group performs content validation for systems that produce IPS bundles without using
+      a FHIR interface, as described in the [IPS Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
 
-      There is currently a single validation test for IPS bundles without any
-      other context-specific constraints.  Therefore, this test measures a
-      systems ability to produce a single, valid IPS bundle. Future enhancements
-      to these tests should require systems to demonstrate more than just a
-      single valid IPS bundle.
+      These tests validate that:
+      1. Systems can produce valid IPS bundles that conform to the profile
+      2. Generated bundles contain all required elements and sections
+      3. Resources within the bundle follow IPS Implementation Guide requirements
+
+      Note: Currently there is a single validation test for IPS bundles without context-specific
+      constraints. Future enhancements may require systems to demonstrate additional capabilities
+      beyond producing a single valid IPS bundle.
     )
+
+    link 'Bundle (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips'
 
     group do
       title 'IPS Bundle with no other constraints'
 
       test do
-        title 'IPS Bundle meets constraints provided in the IPS Bundle profile'
+        title 'IPS Bundle conforms to profile requirements'
         description %(
-          This test will validate the content of an IPS bundle to ensure it is valid.
+          This test validates that a provided IPS bundle conforms to the [Bundle (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips).
+
+          It validates that:
+          1. The resource is a Bundle
+          2. The Bundle type is 'document'
+          3. The Bundle contains all required sections
+          4. All resources within the Bundle conform to their respective IPS profiles
         )
         input :bundle_content, title: 'IPS Bundle', type: 'textarea', optional: true, description: 'Validate a single IPS bundle (optional)'
   

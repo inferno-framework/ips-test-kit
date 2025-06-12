@@ -1,17 +1,30 @@
 module IPS
   class DeviceUseStatement < Inferno::TestGroup
     title 'Device Use Statement (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Device Use Statement (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Device Use Statement (IPS) profile.
+      These tests focus on validating the server's ability to handle DeviceUseStatement resources that
+      represent a patient's use of a medical device according to the IPS Implementation Guide.
+    )
     id :ips_device_use_statement
 
-    test do
-      title 'Server returns correct DeviceUseStatement resource from the DeviceUseStatement read interaction'
-      description %(
-        This test will verify that DeviceUseStatement resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/DeviceUseStatement-uv-ips'
+    link 'Device Use Statement (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DeviceUseStatement-uv-ips'
 
-      input :device_use_statement_id
+    test do
+      title 'Server supports reading Device Use Statement resources'
+      description %(
+        This test verifies that DeviceUseStatement resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches DeviceUseStatement
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :device_use_statement_id,
+            title: 'Device Use Statement ID',
+            description: 'ID of an existing DeviceUseStatement resource on the server that represents a patient\'s use of a medical device'
       makes_request :device_use_statement
 
       run do
@@ -25,11 +38,16 @@ module IPS
     end
 
     test do
-      title 'Server returns DeviceUseStatement resource that matches the Device Use Statement (IPS) profile'
+      title 'Device Use Statement resources conform to IPS profile'
       description %(
-        This test will validate that the DeviceUseStatement resource returned from the server matches the Device Use Statement (IPS) profile.
+        This test validates that the DeviceUseStatement resource returned from the server
+        conforms to the [Device Use Statement (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DeviceUseStatement-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must reference a Device
+        * Must include timing (device usage)
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/DeviceUseStatement-uv-ips'
       uses_request :device_use_statement
 
       run do

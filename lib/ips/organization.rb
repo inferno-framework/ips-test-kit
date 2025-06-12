@@ -1,17 +1,30 @@
 module IPS
   class Organization < Inferno::TestGroup
     title 'Organization (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Organization (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Organization (IPS) profile.
+      These tests focus on validating the server's ability to handle Organization resources that
+      represent healthcare organizations according to the IPS Implementation Guide.
+    )
     id :ips_organization
 
-    test do
-      title 'Server returns correct Organization resource from the Organization read interaction'
-      description %(
-        This test will verify that Organization resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Organization-uv-ips'
+    link 'Organization (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Organization-uv-ips'
 
-      input :organization_id
+    test do
+      title 'Server supports reading Organization resources'
+      description %(
+        This test verifies that Organization resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Organization
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :organization_id,
+            title: 'Organization ID',
+            description: 'ID of an existing Organization resource on the server that represents a healthcare organization'
       makes_request :organization
 
       run do
@@ -25,11 +38,14 @@ module IPS
     end
 
     test do
-      title 'Server returns Organization resource that matches the Organization (IPS) profile'
+      title 'Organization resources conform to IPS profile'
       description %(
-        This test will validate that the Organization resource returned from the server matches the Organization (IPS) profile.
+        This test validates that the Organization resource returned from the server
+        conforms to the [Organization (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Organization-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a name
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Organization-uv-ips'
       uses_request :organization
 
       run do

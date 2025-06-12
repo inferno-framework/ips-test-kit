@@ -1,17 +1,30 @@
 module IPS
   class Specimen < Inferno::TestGroup
     title 'Specimen (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Specimen (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the Specimen (IPS) profile.
+      These tests focus on validating the server's ability to handle Specimen resources that
+      represent clinical specimens according to the IPS Implementation Guide.
+    )
     id :ips_specimen
 
-    test do
-      title 'Server returns correct Specimen resource from the Specimen read interaction'
-      description %(
-        This test will verify that Specimen resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Specimen-uv-ips'
+    link 'Specimen (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Specimen-uv-ips'
 
-      input :specimen_id
+    test do
+      title 'Server supports reading Specimen resources'
+      description %(
+        This test verifies that Specimen resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Specimen
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :specimen_id,
+            title: 'Specimen ID',
+            description: 'ID of an existing Specimen resource on the server that represents a clinical specimen'
       makes_request :specimen
 
       run do
@@ -25,11 +38,14 @@ module IPS
     end
 
     test do
-      title 'Server returns Specimen resource that matches the Specimen (IPS) profile'
+      title 'Specimen resources conform to IPS profile'
       description %(
-        This test will validate that the Specimen resource returned from the server matches the Specimen (IPS) profile.
+        This test validates that the Specimen resource returned from the server
+        conforms to the [Specimen (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Specimen-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a type
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Specimen-uv-ips'
       uses_request :specimen
 
       run do

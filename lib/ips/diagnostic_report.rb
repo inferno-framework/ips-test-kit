@@ -1,17 +1,30 @@
 module IPS
   class DiagnosticReport < Inferno::TestGroup
     title 'DiagnosticReport (IPS) Tests'
-    description 'Verify support for the server capabilities required by the DiagnosticReport (IPS) profile.'
+    description %(
+      Verify support for the server capabilities required by the DiagnosticReport (IPS) profile.
+      These tests focus on validating the server's ability to handle DiagnosticReport resources that
+      represent diagnostic test results and reports according to the IPS Implementation Guide.
+    )
     id :ips_diagnostic_report
 
-    test do
-      title 'Server returns correct DiagnosticReport resource from the DiagnosticReport read interaction'
-      description %(
-        This test will verify that DiagnosticReport resources can be read from the server.
-      )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/DiagnosticReport-uv-ips'
+    link 'DiagnosticReport (IPS) Profile',
+         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DiagnosticReport-uv-ips'
 
-      input :diagnostic_report_id
+    test do
+      title 'Server supports reading DiagnosticReport resources'
+      description %(
+        This test verifies that DiagnosticReport resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches DiagnosticReport
+        3. The returned resource ID matches the requested ID
+      )
+
+      input :diagnostic_report_id,
+            title: 'DiagnosticReport ID',
+            description: 'ID of an existing DiagnosticReport resource on the server that represents diagnostic test results'
       makes_request :diagnostic_report
 
       run do
@@ -25,11 +38,18 @@ module IPS
     end
 
     test do
-      title 'Server returns DiagnosticReport resource that matches the DiagnosticReport (IPS) profile'
+      title 'DiagnosticReport resources conform to IPS profile'
       description %(
-        This test will validate that the DiagnosticReport resource returned from the server matches the DiagnosticReport (IPS) profile.
+        This test validates that the DiagnosticReport resource returned from the server
+        conforms to the [DiagnosticReport (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DiagnosticReport-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must have a code identifying the type of diagnostic report
+        * Must have a category
+        * Must have an effective time
+        * Must reference a Patient as the subject
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/DiagnosticReport-uv-ips'
       uses_request :diagnostic_report
 
       run do
