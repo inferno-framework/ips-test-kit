@@ -14,10 +14,10 @@ module IPS
       Note: Currently there is a single validation test for IPS bundles without context-specific
       constraints. Future enhancements may require systems to demonstrate additional capabilities
       beyond producing a single valid IPS bundle.
-    )
 
-    link 'Bundle (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips'
+      For more information, see:
+      * [Bundle (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips)
+    )
 
     group do
       title 'IPS Bundle with no other constraints'

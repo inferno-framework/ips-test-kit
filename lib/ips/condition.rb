@@ -8,8 +8,14 @@ module IPS
     )
     id :ips_condition
 
-    link 'Condition (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Condition-uv-ips'
+    description %(
+      Verify support for the server capabilities required by the Condition (IPS) profile.
+      These tests focus on validating the server's ability to handle Condition resources that
+      represent problems and diagnoses according to the IPS Implementation Guide.
+      
+      For more information, see:
+      * [Condition (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Condition-uv-ips)
+    )
 
     test do
       title 'Server supports reading Condition resources'

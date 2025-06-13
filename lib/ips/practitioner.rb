@@ -1,15 +1,17 @@
 module IPS
   class Practitioner < Inferno::TestGroup
     title 'Practitioner (IPS) Tests'
+    id :ips_practitioner
+
     description %(
       Verify support for the server capabilities required by the Practitioner (IPS) profile.
       These tests focus on validating the server's ability to handle Practitioner resources that
       represent healthcare providers according to the IPS Implementation Guide.
-    )
-    id :ips_practitioner
 
-    link 'Practitioner (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Practitioner-uv-ips'
+      For more information, see:
+      * [Practitioner (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Practitioner-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading Practitioner resources'

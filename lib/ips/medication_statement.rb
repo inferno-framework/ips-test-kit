@@ -1,15 +1,16 @@
 module IPS
   class MedicationStatement < Inferno::TestGroup
     title 'Medication Statement (IPS) Tests'
+    id :ips_medication_statement
+
     description %(
       Verify support for the server capabilities required by the Medication Statement (IPS) profile.
       These tests focus on validating the server's ability to handle MedicationStatement resources that
       represent a patient's reported medication use according to the IPS Implementation Guide.
-    )
-    id :ips_medication_statement
 
-    link 'Medication Statement (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationStatement-uv-ips'
+      For more information, see:
+      * [Medication Statement (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationStatement-uv-ips)
+    )
 
     input :medication_statement_id,
           title: 'MedicationStatement ID',

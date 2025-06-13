@@ -1,15 +1,17 @@
 module IPS
   class Organization < Inferno::TestGroup
     title 'Organization (IPS) Tests'
+    id :ips_organization
+
     description %(
       Verify support for the server capabilities required by the Organization (IPS) profile.
       These tests focus on validating the server's ability to handle Organization resources that
       represent healthcare organizations according to the IPS Implementation Guide.
-    )
-    id :ips_organization
 
-    link 'Organization (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Organization-uv-ips'
+      For more information, see:
+      * [Organization (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Organization-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading Organization resources'

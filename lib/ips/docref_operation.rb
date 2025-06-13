@@ -2,6 +2,10 @@ module IPS
   class DocRefOperation < Inferno::TestGroup
     title 'DocRef Operation Tests'
 
+    id :ips_docref_operation
+    run_as_group
+    optional
+
     description %(
       Verify support for the $docref operation as described in the [IPS
       Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
@@ -9,10 +13,10 @@ module IPS
       These tests validate that the server properly supports the DocumentReference/$docref
       operation for retrieving patient documents. Note that this currently does not
       request an IPS bundle specifically, therefore does not validate the content.
+      
+      For more information, see:
+      * [DocumentReference $docref Operation](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html#documentreferencedocref)
     )
-    id :ips_docref_operation
-    run_as_group
-    optional
 
     test do
       title 'IPS Server declares support for $docref operation in CapabilityStatement'
@@ -27,8 +31,6 @@ module IPS
            * The standard operation definition URL
            * The operation name 'docref'
       )
-      link 'DocumentReference $docref Operation',
-           'http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html#documentreferencedocref'
 
       run do
         fhir_get_capability_statement

@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Allergy Intolerance (IPS) profile.
       These tests focus on validating the server's ability to handle AllergyIntolerance resources
       according to the International Patient Summary Implementation Guide requirements.
+
+      For more information, see:
+      * [AllergyIntolerance (IPS) Profile](http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips)
     )
     id :ips_allergy_intolerance
-    
-    link 'AllergyIntolerance (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips'
 
     test do
       title 'Server supports reading AllergyIntolerance resources'
@@ -21,8 +21,6 @@ module IPS
         2. The resource type matches AllergyIntolerance
         3. The returned resource ID matches the requested ID
         
-        [IPS Server CapabilityStatement](http://hl7.org/fhir/uv/ips/CapabilityStatement/ips-server)
-        requires servers to support the read interaction for AllergyIntolerance resources.
       )
       
       input :allergy_intolerance_id,

@@ -11,12 +11,18 @@ module IPS
     )
     id :ips_bundle
     
-    link 'Bundle (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips'
-    link 'IPS Implementation Guide - Bundle Requirements',
-         'http://hl7.org/fhir/uv/ips/bundle.html'
-    link 'IPS Server Capability Statement',
-         'http://hl7.org/fhir/uv/ips/CapabilityStatement/ips-server'
+    description %(
+      Verify support for the server capabilities required by the Bundle (IPS) profile.
+      These tests focus on validating the server's ability to handle Bundle resources that
+      represent International Patient Summary documents according to the IPS Implementation Guide.
+      
+      The Bundle resource is fundamental to IPS as it serves as the container for
+      the complete patient summary document, including the Composition and all referenced resources.
+      
+      For more information, see:
+      * [Bundle (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips)
+      * [IPS Implementation Guide - Bundle Requirements](http://hl7.org/fhir/uv/ips/STU1.1/bundle.html)
+    )
 
     test do
       title 'Server supports reading Bundle resources'
@@ -53,7 +59,7 @@ module IPS
       title 'Bundle resources conform to IPS profile'
       description %(
         This test validates that the Bundle resource returned from the server
-        conforms to the [Bundle (IPS) profile](http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips).
+        conforms to the [Bundle (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips).
         
         The IPS Bundle profile requirements include:
         * Must be a Document type Bundle

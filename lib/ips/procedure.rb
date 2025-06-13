@@ -1,15 +1,17 @@
 module IPS
   class Procedure < Inferno::TestGroup
     title 'Procedure (IPS) Tests'
+    id :ips_procedure
+
     description %(
       Verify support for the server capabilities required by the Procedure (IPS) profile.
       These tests focus on validating the server's ability to handle Procedure resources that
       represent medical procedures according to the IPS Implementation Guide.
-    )
-    id :ips_procedure
 
-    link 'Procedure (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Procedure-uv-ips'
+      For more information, see:
+      * [Procedure (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Procedure-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading Procedure resources'

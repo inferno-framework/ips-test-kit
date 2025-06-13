@@ -1,15 +1,16 @@
 module IPS
   class Device < Inferno::TestGroup
     title 'Device (IPS) Tests'
+    id :ips_device
+
     description %(
       Verify support for the server capabilities required by the Device (IPS) profile.
       These tests focus on validating the server's ability to handle Device resources that
       represent medical devices according to the IPS Implementation Guide.
-    )
-    id :ips_device
 
-    link 'Device (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-uv-ips'
+      For more information, see:
+      * [Device (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-uv-ips)
+    )
 
     test do
       title 'Server supports reading Device resources'

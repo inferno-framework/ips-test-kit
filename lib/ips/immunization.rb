@@ -1,15 +1,16 @@
 module IPS
   class Immunization < Inferno::TestGroup
     title 'Immunization (IPS) Tests'
+    id :ips_immunization
+
     description %(
       Verify support for the server capabilities required by the Immunization (IPS) profile.
       These tests focus on validating the server's ability to handle Immunization resources that
       represent vaccinations according to the IPS Implementation Guide.
-    )
-    id :ips_immunization
 
-    link 'Immunization (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Immunization-uv-ips'
+      For more information, see:
+      * [Immunization (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Immunization-uv-ips)
+    )
 
     test do
       title 'Server supports reading Immunization resources'

@@ -1,15 +1,17 @@
 module IPS
   class Specimen < Inferno::TestGroup
     title 'Specimen (IPS) Tests'
+    id :ips_specimen
+
     description %(
       Verify support for the server capabilities required by the Specimen (IPS) profile.
       These tests focus on validating the server's ability to handle Specimen resources that
       represent clinical specimens according to the IPS Implementation Guide.
-    )
-    id :ips_specimen
 
-    link 'Specimen (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Specimen-uv-ips'
+      For more information, see:
+      * [Specimen (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Specimen-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading Specimen resources'

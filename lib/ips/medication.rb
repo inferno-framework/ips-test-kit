@@ -1,15 +1,16 @@
 module IPS
   class Medication < Inferno::TestGroup
     title 'Medication (IPS) Tests'
+    id :ips_medication
+
     description %(
       Verify support for the server capabilities required by the Medication (IPS) profile.
       These tests focus on validating the server's ability to handle Medication resources that
       represent medications according to the IPS Implementation Guide.
-    )
-    id :ips_medication
 
-    link 'Medication (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Medication-uv-ips'
+      For more information, see:
+      * [Medication (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Medication-uv-ips)
+    )
 
     test do
       title 'Server supports reading Medication resources'

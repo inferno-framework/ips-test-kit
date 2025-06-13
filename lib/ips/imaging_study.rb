@@ -1,15 +1,16 @@
 module IPS
   class ImagingStudy < Inferno::TestGroup
     title 'Imaging Study (IPS) Tests'
+    id :ips_imaging_study
+
     description %(
       Verify support for the server capabilities required by the Imaging Study (IPS) profile.
       These tests focus on validating the server's ability to handle ImagingStudy resources that
       represent imaging procedures according to the IPS Implementation Guide.
-    )
-    id :ips_imaging_study
 
-    link 'Imaging Study (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/ImagingStudy-uv-ips'
+      For more information, see:
+      * [Imaging Study (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/ImagingStudy-uv-ips)
+    )
 
     test do
       title 'Server supports reading Imaging Study resources'

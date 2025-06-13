@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation Results (IPS) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent clinical findings and measurements according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation Results (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-uv-ips)
     )
     id :ips_observation_results
-
-    link 'Observation Results (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-uv-ips'
 
     input :observation_results_id,
           title: 'Observation Results ID',

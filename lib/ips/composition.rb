@@ -9,13 +9,11 @@ module IPS
       The Composition resource is crucial to IPS as it defines the structure and organization
       of the patient summary, including required sections like allergies, medications, and problems.
       It serves as the clinical document wrapper within the IPS Bundle.
+
+      For more information, see:
+      * [Composition (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Composition-uv-ips)
     )
     id :ips_composition
-    
-    link 'Composition (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Composition-uv-ips'
-    link 'IPS Implementation Guide - Composition',
-         'http://hl7.org/fhir/uv/ips/STU1.1/composition.html'
 
     test do
       title 'Server supports reading Composition resources'

@@ -8,8 +8,15 @@ module IPS
     )
     id :ips_practitioner_role
 
-    link 'PractitionerRole (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/PractitionerRole-uv-ips'
+    description %(
+      Verify support for the server capabilities required by the PractitionerRole (IPS) profile.
+      These tests focus on validating the server's ability to handle PractitionerRole resources that
+      represent healthcare provider roles and responsibilities according to the IPS Implementation Guide.
+      
+      For more information, see:
+      * [PractitionerRole (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/PractitionerRole-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading PractitionerRole resources'
@@ -42,7 +49,6 @@ module IPS
       description %(
         This test validates that the PractitionerRole resource returned from the server
         conforms to the [PractitionerRole (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/PractitionerRole-uv-ips).
-
       )
       uses_request :practitioner_role
 

@@ -13,8 +13,6 @@ module IPS
         
         [Additional context about what the test verifies]
       )
-      # Reference Implementation Guide
-      # link '[Implementation Guide URL]'
 
       # Test Prerequisites/Setup
       input :resource_id  # Define required inputs

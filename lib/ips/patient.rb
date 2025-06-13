@@ -1,15 +1,17 @@
 module IPS
   class Patient < Inferno::TestGroup
     title 'Patient (IPS) Tests'
+    id :ips_patient
+
     description %(
       Verify support for the server capabilities required by the Patient (IPS) profile.
       These tests focus on validating the server's ability to handle Patient resources that
       represent the subject of care according to the IPS Implementation Guide.
-    )
-    id :ips_patient
 
-    link 'Patient (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Patient-uv-ips'
+      For more information, see:
+      * [Patient (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Patient-uv-ips)
+
+    )
 
     test do
       title 'Server supports reading Patient resources'

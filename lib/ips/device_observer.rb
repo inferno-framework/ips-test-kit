@@ -8,8 +8,14 @@ module IPS
     )
     id :ips_device_observer
 
-    link 'Device (performer, observer) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-observer-uv-ips'
+    description %(
+      Verify support for the server capabilities required by the Device (performer, observer) profile.
+      These tests focus on validating the server's ability to handle Device resources that
+      represent devices used to make observations according to the IPS Implementation Guide.
+      
+      For more information, see:
+      * [Device (performer, observer) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-observer-uv-ips)
+    )
 
     test do
       title 'Server supports reading Device Observer resources'
@@ -42,7 +48,6 @@ module IPS
       description %(
         This test validates that the Device resource returned from the server
         conforms to the [Device (performer, observer) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Device-observer-uv-ips).
-
       )
       uses_request :device_observer
 

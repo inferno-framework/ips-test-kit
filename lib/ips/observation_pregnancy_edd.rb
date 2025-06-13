@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation (Pregnancy: EDD) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent estimated delivery dates according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation (Pregnancy: EDD) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-edd-uv-ips)
     )
     id :ips_observation_pregnancy_edd
-
-    link 'Observation (Pregnancy: EDD) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-edd-uv-ips'
 
     input :observation_pregnancy_edd_id,
           title: 'Pregnancy EDD Observation ID',

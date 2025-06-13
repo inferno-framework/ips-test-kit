@@ -1,15 +1,16 @@
 module IPS
   class ObservationResultsLaboratory < Inferno::TestGroup
     title 'Observation Results: laboratory (IPS) Tests'
+    id :ips_observation_results_laboratory
+
     description %(
       Verify support for the server capabilities required by the Observation Results: laboratory (IPS) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent laboratory test results according to the IPS Implementation Guide.
-    )
-    id :ips_observation_results_laboratory
 
-    link 'Observation Results: Laboratory (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-laboratory-uv-ips'
+      For more information, see:
+      * [Observation Results: Laboratory (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-laboratory-uv-ips)
+    )
 
     input :observation_results_laboratory_id,
           title: 'Laboratory Results ID',

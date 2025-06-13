@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation (Pregnancy: outcome) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent pregnancy outcomes according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation (Pregnancy: outcome) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-outcome-uv-ips)
     )
     id :ips_observation_pregnancy_outcome
-
-    link 'Observation (Pregnancy: outcome) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-pregnancy-outcome-uv-ips'
 
     input :observation_pregnancy_outcome_id,
           title: 'Pregnancy Outcome Observation ID',

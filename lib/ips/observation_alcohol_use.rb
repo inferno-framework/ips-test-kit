@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation (SH: alcohol use) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent alcohol use information according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation (SH: alcohol use) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-alcoholuse-uv-ips)
     )
     id :ips_observation_alcohol_use
-
-    link 'Observation (SH: alcohol use) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-alcoholuse-uv-ips'
 
     input :observation_alcohol_use_id,
           title: 'Alcohol Use Observation ID',

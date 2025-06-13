@@ -1,15 +1,16 @@
 module IPS
   class DiagnosticReport < Inferno::TestGroup
     title 'DiagnosticReport (IPS) Tests'
+    id :ips_diagnostic_report
+
     description %(
       Verify support for the server capabilities required by the DiagnosticReport (IPS) profile.
       These tests focus on validating the server's ability to handle DiagnosticReport resources that
       represent diagnostic test results and reports according to the IPS Implementation Guide.
-    )
-    id :ips_diagnostic_report
 
-    link 'DiagnosticReport (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DiagnosticReport-uv-ips'
+      For more information, see:
+      * [DiagnosticReport (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DiagnosticReport-uv-ips)
+    )
 
     test do
       title 'Server supports reading DiagnosticReport resources'

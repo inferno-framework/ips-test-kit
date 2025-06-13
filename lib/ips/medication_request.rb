@@ -1,15 +1,16 @@
 module IPS
   class MedicationRequest < Inferno::TestGroup
     title 'MedicationRequest (IPS) Tests'
+    id :ips_medication_request
+
     description %(
       Verify support for the server capabilities required by the MedicationRequest (IPS) profile.
       These tests focus on validating the server's ability to handle MedicationRequest resources that
       represent medication prescriptions according to the IPS Implementation Guide.
-    )
-    id :ips_medication_request
 
-    link 'MedicationRequest (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationRequest-uv-ips'
+      For more information, see:
+      * [MedicationRequest (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationRequest-uv-ips)
+    )
 
     test do
       title 'Server supports reading MedicationRequest resources'

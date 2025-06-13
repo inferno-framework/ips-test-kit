@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation Results: pathology (IPS) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent pathology test results according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation Results: Pathology (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-pathology-uv-ips)
     )
     id :ips_observation_results_pathology
-
-    link 'Observation Results: Pathology (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-results-pathology-uv-ips'
 
     input :observation_results_pathology_id,
           title: 'Pathology Results ID',

@@ -1,15 +1,16 @@
 module IPS
   class DeviceUseStatement < Inferno::TestGroup
     title 'Device Use Statement (IPS) Tests'
+    id :ips_device_use_statement
+
     description %(
       Verify support for the server capabilities required by the Device Use Statement (IPS) profile.
       These tests focus on validating the server's ability to handle DeviceUseStatement resources that
       represent a patient's use of a medical device according to the IPS Implementation Guide.
-    )
-    id :ips_device_use_statement
 
-    link 'Device Use Statement (IPS) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DeviceUseStatement-uv-ips'
+      For more information, see:
+      * [Device Use Statement (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/DeviceUseStatement-uv-ips)
+    )
 
     test do
       title 'Server supports reading Device Use Statement resources'

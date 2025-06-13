@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Media observation (Results: laboratory, media) profile.
       These tests focus on validating the server's ability to handle Media resources that
       represent laboratory media observations according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Media observation (Results: laboratory, media) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Media-observation-uv-ips)
     )
     id :ips_media_observation
-
-    link 'Media observation (Results: laboratory, media) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Media-observation-uv-ips'
 
     test do
       title 'Server supports reading Media resources'

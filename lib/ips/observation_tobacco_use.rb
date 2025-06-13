@@ -5,11 +5,11 @@ module IPS
       Verify support for the server capabilities required by the Observation (SH: tobacco use) profile.
       These tests focus on validating the server's ability to handle Observation resources that
       represent tobacco use information according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Observation (SH: tobacco use) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-tobaccouse-uv-ips)
     )
     id :ips_observation_tobacco_use
-
-    link 'Observation (SH: tobacco use) Profile',
-         'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Observation-tobaccouse-uv-ips'
 
     input :observation_tobacco_use_id,
           title: 'Tobacco Use Observation ID',
