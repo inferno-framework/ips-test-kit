@@ -14,26 +14,6 @@ module IPS
     authors ['MITRE Inferno Team']
     repo 'https://github.com/inferno-framework/ips-test-kit'
 
-    # External Links
-    links [
-      {
-        label: 'Implementation Guide',
-        url: 'https://hl7.org/fhir/uv/ips/STU1.1/'
-      },
-      {
-        label: 'Source Code',
-        url: 'https://github.com/inferno-framework/ips-test-kit'
-      },
-      {
-        label: 'Issues',
-        url: 'https://github.com/inferno-framework/ips-test-kit/issues'
-      },
-      {
-        label: 'Inferno Framework',
-        url: 'https://inferno-framework.github.io/inferno-core/'
-      }
-    ]
-
     description <<~DESCRIPTION
       # Overview
       The International Patient Summary Test Kit provides an executable set of tests for the 
