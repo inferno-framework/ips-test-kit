@@ -25,6 +25,8 @@ See the [Inferno Framework
 Documentation](https://inferno-framework.github.io/docs/getting-started-users.html)
 for more information on running Inferno.
 
+Additional [guidance](docs) and a [test template](docs/resource_test_template.rb) are included to support standardized and readable test kit structure.
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
