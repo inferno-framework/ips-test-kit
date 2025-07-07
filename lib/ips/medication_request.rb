@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading MedicationRequest resources'
+      title 'Server returns correct MedicationRequest resource from the MedicationRequest read interaction'
       description %(
         This test verifies that MedicationRequest resources can be read from the server.
         

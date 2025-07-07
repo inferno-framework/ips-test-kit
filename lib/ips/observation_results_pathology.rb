@@ -16,7 +16,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents pathology test results'
 
     test do
-      title 'Server supports reading Pathology Results resources'
+      title 'Server returns correct Pathology Results resource from the Pathology Results read interaction'
       description %(
         This test verifies that Observation resources containing pathology results can be read from the server.
         

@@ -13,12 +13,12 @@ module IPS
 
     input :observation_results_id,
           title: 'Observation Results ID',
-          description: 'ID of an existing Observation resource on the server that represents clinical findings or measurements'
+          description: 'ID of an existing Observation Resuts resource on the server that represents clinical findings or measurements'
 
     test do
-      title 'Server supports reading Observation Results resources'
+      title 'Server returns correct Observation Results resource from the Observation Results read interaction'
       description %(
-        This test verifies that Observation resources containing clinical results can be read from the server.
+        This test verifies that Observation Results resources containing clinical results can be read from the server.
         
         It validates that:
         1. The server responds to a read request with a 200 OK status

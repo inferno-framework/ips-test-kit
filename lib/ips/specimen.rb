@@ -14,7 +14,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Specimen resources'
+      title 'Server returns correct Specimen resource from the Specimen read interaction'
       description %(
         This test verifies that Specimen resources can be read from the server.
         

@@ -16,7 +16,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents an estimated delivery date'
 
     test do
-      title 'Server supports reading Pregnancy EDD Observation resources'
+      title 'Server returns correct Pregnancy EDD Observation resource from the Pregnancy EDD Observation read interaction'
       description %(
         This test verifies that Observation resources containing estimated delivery dates can be read from the server.
         

@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Device Use Statement resources'
+      title 'Server returns correct Device Use Statement resource from the Device Use Statement read interactions'
       description %(
         This test verifies that DeviceUseStatement resources can be read from the server.
         

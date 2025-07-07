@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Device resources'
+      title 'Server returns correct Device resource from the Device read interaction'
       description %(
         This test verifies that Device resources can be read from the server.
         

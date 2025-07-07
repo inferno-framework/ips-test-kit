@@ -16,7 +16,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents alcohol use information'
 
     test do
-      title 'Server supports reading Alcohol Use Observation resources'
+      title 'Server returns correct Alcohol Use Observation resource from the Observation read interaction'
       description %(
         This test verifies that Observation resources containing alcohol use information can be read from the server.
         

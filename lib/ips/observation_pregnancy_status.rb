@@ -16,7 +16,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents pregnancy status information'
 
     test do
-      title 'Server supports reading Pregnancy Status Observation resources'
+      title 'Server returns correct Pregnancy Status Observation resource from the Pregnancy Status Observation read interaction'
       description %(
         This test verifies that Observation resources containing pregnancy status information can be read from the server.
         

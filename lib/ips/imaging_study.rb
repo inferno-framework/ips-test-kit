@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Imaging Study resources'
+      title 'Server returns correct Imaging Study resource from the Study read interaction'
       description %(
         This test verifies that ImagingStudy resources can be read from the server.
         

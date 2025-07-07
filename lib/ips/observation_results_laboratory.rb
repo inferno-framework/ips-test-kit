@@ -17,7 +17,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents laboratory test results'
 
     test do
-      title 'Server supports reading Laboratory Results resources'
+      title 'Server returns correct Laboratory Results resource from the Laboratory read interaction'
       description %(
         This test verifies that Observation resources containing laboratory results can be read from the server.
         

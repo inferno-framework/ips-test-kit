@@ -14,7 +14,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Patient resources'
+      title 'Server returns correct Patient resource from the Patient read interaction'
       description %(
         This test verifies that Patient resources can be read from the server.
         

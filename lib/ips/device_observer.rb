@@ -18,7 +18,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Device Observer resources'
+      title 'Server returns correct Device Observer resource from the Device Observer read interaction'
       description %(
         This test verifies that Device resources can be read from the server.
         

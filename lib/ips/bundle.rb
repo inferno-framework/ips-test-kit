@@ -25,7 +25,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Bundle resources'
+      title 'Server returns correct Bundle resource from the Bundle read interaction'
       description %(
         This test verifies that Bundle resources can be read from the server.
         

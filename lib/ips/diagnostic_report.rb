@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading DiagnosticReport resources'
+      title 'Server returns correct DiagnosticReport resource from the DiagnosticReport read interaction'
       description %(
         This test verifies that DiagnosticReport resources can be read from the server.
         

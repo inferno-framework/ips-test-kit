@@ -12,7 +12,7 @@ module IPS
     id :ips_media_observation
 
     test do
-      title 'Server supports reading Media resources'
+      title 'Server returns correct Media resource from the Media read interaction'
       description %(
         This test verifies that Media resources can be read from the server.
         

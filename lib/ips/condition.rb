@@ -18,7 +18,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Condition resources'
+      title 'Server returns correct Condition resource from the Condition read interaction'
       description %(
         This test verifies that Condition resources can be read from the server.
         

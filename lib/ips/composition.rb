@@ -16,7 +16,7 @@ module IPS
     id :ips_composition
 
     test do
-      title 'Server supports reading Composition resources'
+      title 'Server returns correct Composition resource from the Composition read interaction'
       description %(
         This test verifies that Composition resources can be read from the server.
         

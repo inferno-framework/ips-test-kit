@@ -14,7 +14,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Organization resources'
+      title 'Server returns correct Organization resource from the Organization read interaction'
       description %(
         This test verifies that Organization resources can be read from the server.
         

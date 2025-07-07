@@ -14,7 +14,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Procedure resources'
+      title 'Server returns correct Procedure resource from the Procedure read interaction'
       description %(
         This test verifies that Procedure resources can be read from the server.
         

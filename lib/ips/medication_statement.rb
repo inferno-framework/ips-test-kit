@@ -17,7 +17,7 @@ module IPS
           description: 'ID of an existing MedicationStatement resource on the server that represents a patient\'s reported medication use'
 
     test do
-      title 'Server supports reading MedicationStatement resources'
+      title 'Server returns correct MedicationStatement resource from the MedicationStatement read interaction'
       description %(
         This test verifies that MedicationStatement resources can be read from the server.
         

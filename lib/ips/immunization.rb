@@ -13,7 +13,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Immunization resources'
+      title 'Server returns correct Immunization resource from the Immunization read interaction'
       description %(
         This test verifies that Immunization resources can be read from the server.
         

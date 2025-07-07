@@ -16,7 +16,7 @@ module IPS
           description: 'ID of an existing Observation resource on the server that represents tobacco use information'
 
     test do
-      title 'Server supports reading Tobacco Use Observation resources'
+      title 'Server returns correct Tobacco Use Observation resource from the Tobacco Use Observation read interaction'
       description %(
         This test verifies that Observation resources containing tobacco use information can be read from the server.
         

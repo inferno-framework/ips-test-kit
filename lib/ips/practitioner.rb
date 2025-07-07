@@ -14,7 +14,7 @@ module IPS
     )
 
     test do
-      title 'Server supports reading Practitioner resources'
+      title 'Server returns correct Practitioner resource from the Practitioner read interaction'
       description %(
         This test verifies that Practitioner resources can be read from the server.
         

@@ -12,7 +12,7 @@ module IPS
     id :ips_allergy_intolerance
 
     test do
-      title 'Server supports reading AllergyIntolerance resources'
+      title 'Server returns correct AllergyIntolerance resource from the AllergyIntolerance read interaction'
       description %(
         This test verifies that AllergyIntolerance resources can be read from the server.
         
