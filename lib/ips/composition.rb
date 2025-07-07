@@ -68,7 +68,7 @@ module IPS
       uses_request :composition
 
       run do
-        assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Composition-uv-ips')
+        assert_valid_resource(profile_url: 'http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips')
       end
     end
   end
