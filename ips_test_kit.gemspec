@@ -4,7 +4,6 @@ Gem::Specification.new do |spec|
   spec.name          = 'ips_test_kit'
   spec.version       = IPS::VERSION
   spec.authors       = ['MITRE']
-  spec.email         = ['inferno@groups.mitre.org']
   spec.date          = Time.now.utc.strftime('%Y-%m-%d')
   spec.summary       = 'IPS Tests'
   spec.description   = 'IPS Tests'
