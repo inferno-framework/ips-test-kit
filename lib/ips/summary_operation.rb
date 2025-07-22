@@ -5,8 +5,12 @@ module IPS
   class SummaryOperation < Inferno::TestGroup
     title 'Summary Operation Tests'
     description %(
-        Verify support for the $summary operation as as described in the [IPS
-        Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+      Verify support for the $summary operation as described in the [IPS
+      Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+      
+      These tests validate that the server can generate and return a complete
+      International Patient Summary document bundle containing all required
+      resources and sections according to the IPS Implementation Guide.
     )
     id :ips_summary_operation
     run_as_group
@@ -20,9 +24,13 @@ module IPS
     test do
       title 'IPS Server returns Bundle resource containing valid IPS MedicationStatement entry'
       description %(
-        IPS Server return valid IPS MedicationStatement resource in the Bundle as first entry
+        This test verifies that the Bundle returned from the $summary operation contains
+        valid MedicationStatement resources conforming to the IPS profile.
+
+        It validates that:
+        1. The Bundle contains at least one MedicationStatement resource
+        2. Each MedicationStatement resource conforms to the [IPS MedicationStatement Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/MedicationStatement-uv-ips)
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-MedicationStatement-uv-ips.html'
       uses_request :summary_operation
 
       run do
@@ -43,9 +51,13 @@ module IPS
     test do
       title 'IPS Server returns Bundle resource containing valid IPS AllergyIntolerance entry'
       description %(
-        IPS Server return valid IPS AllergyIntolerance resource in the Bundle as first entry
+        This test verifies that the Bundle returned from the $summary operation contains
+        valid AllergyIntolerance resources conforming to the IPS profile.
+
+        It validates that:
+        1. The Bundle contains at least one AllergyIntolerance resource
+        2. Each AllergyIntolerance resource conforms to the [IPS AllergyIntolerance Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/AllergyIntolerance-uv-ips)
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-AllergyIntolerance-uv-ips.html'
       uses_request :summary_operation
 
       run do
@@ -66,9 +78,13 @@ module IPS
     test do
       title 'IPS Server returns Bundle resource containing valid IPS Condition entry'
       description %(
-        IPS Server return valid IPS Condition resource in the Bundle as first entry
+        This test verifies that the Bundle returned from the $summary operation contains
+        valid Condition resources conforming to the IPS profile.
+
+        It validates that:
+        1. The Bundle contains at least one Condition resource
+        2. Each Condition resource conforms to the [IPS Condition Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Condition-uv-ips)
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-Condition-uv-ips.html'
       uses_request :summary_operation
 
       run do

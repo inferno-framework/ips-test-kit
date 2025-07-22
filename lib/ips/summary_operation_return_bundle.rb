@@ -4,9 +4,15 @@ module IPS
   class SummaryOperationReturnBundle < Inferno::Test
     title 'IPS Server returns Bundle resource for Patient/[id]/$summary GET operation'
     description %(
-      IPS Server returns a valid IPS Bundle resource as successful result of
-      $summary operation.
+      This test verifies that the server returns a valid IPS Bundle resource when executing
+      the $summary operation on a Patient resource, as required by the [IPS Implementation Guide](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
 
+      It validates that:
+      1. The server responds with a 200 OK status
+      2. The response is a Bundle resource
+      3. The Bundle conforms to the [IPS Bundle Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Bundle-uv-ips)
+
+      Technical Note:
       This test currently only issues a GET request for the summary due to a
       limitation in Inferno in issuing POST requests that omit a Content-Type
       header when the body is empty. Inferno currently adds a `Content-Type:

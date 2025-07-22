@@ -1,17 +1,32 @@
 module IPS
   class Procedure < Inferno::TestGroup
     title 'Procedure (IPS) Tests'
-    description 'Verify support for the server capabilities required by the Procedure (IPS) profile.'
     id :ips_procedure
+
+    description %(
+      Verify support for the server capabilities required by the Procedure (IPS) profile.
+      These tests focus on validating the server's ability to handle Procedure resources that
+      represent medical procedures according to the IPS Implementation Guide.
+
+      For more information, see:
+      * [Procedure (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Procedure-uv-ips)
+
+    )
 
     test do
       title 'Server returns correct Procedure resource from the Procedure read interaction'
       description %(
-        This test will verify that Procedure resources can be read from the server.
+        This test verifies that Procedure resources can be read from the server.
+        
+        It validates that:
+        1. The server responds to a read request with a 200 OK status
+        2. The resource type matches Procedure
+        3. The returned resource ID matches the requested ID
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips'
 
-      input :procedure_id
+      input :procedure_id,
+            title: 'Procedure ID',
+            description: 'ID of an existing Procedure resource on the server that represents a medical procedure'
       makes_request :procedure
 
       run do
@@ -25,11 +40,17 @@ module IPS
     end
 
     test do
-      title 'Server returns Procedure resource that matches the Procedure (IPS) profile'
+      title 'Procedure resources conform to IPS profile'
       description %(
-        This test will validate that the Procedure resource returned from the server matches the Procedure (IPS) profile.
+        This test validates that the Procedure resource returned from the server
+        conforms to the [Procedure (IPS) Profile](http://hl7.org/fhir/uv/ips/STU1.1/StructureDefinition/Procedure-uv-ips).
+
+        Profile-specific requirements verified by this test include:
+        * Must have a status
+        * Must have a code identifying the procedure
+        * Must reference a Patient as the subject
+        * Must have a performed time
       )
-      # link 'http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips'
       uses_request :procedure
 
       run do

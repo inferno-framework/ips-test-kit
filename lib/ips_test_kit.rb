@@ -6,29 +6,28 @@ module IPS
     title 'International Patient Summary (IPS) v1.1.0'
     short_title 'IPS v1.1.0'
     description %(
-      This test suite evaluates the ability of a system to provide patient
-      summary data expressed using HL7® FHIR® in accordance with the
-      [International Patient Summary Implementation Guide (IPS
+      This test suite evaluates the ability of systems to provide International Patient Summary (IPS) data
+      using HL7® FHIR® in accordance with the [International Patient Summary Implementation Guide (IPS
       IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).
 
-      Because IPS bundles can be generated and transmitted in many different
-      ways beyond a traditional FHIR RESTful server, this test suite allows you
-      to optionally evaluate a single bundle that is not being provided by a server in the
-      'IPS Resource Validation Tests'.
+      Key Capabilities:
+      * Validation of IPS bundles against FHIR profiles and implementation guide requirements
+      * Testing of standard FHIR APIs for generating and communicating IPS bundles
+      * Verification of FHIR API access to individual IPS resources
+      * Support for both server-based and standalone bundle validation workflows
 
-      For systems that support a standard API for generating and communicating
-      these bundles in accordance with the guidance provided in the IG, use the
-      'IPS Operation Tests'.
+      Usage Scenarios:
+      1. Bundle Validation: Use 'IPS Resource Validation Tests' to evaluate standalone IPS bundles
+         without requiring a server implementation
+      2. API Operations: Use 'IPS Operation Tests' to verify systems that support standard APIs
+         for generating and communicating IPS bundles
+      3. Resource Access: Use 'IPS Read Tests' to validate systems that provide FHIR API access
+         to individual IPS resources
 
-      For systems that also provide a FHIR API access to the components resources
-      of the IPS bundle, use the 'IPS Read Tests'.
-
-      This suite provides two presets:
-      * HL7.org IPS Server: Hosted reference IPS Server.  This is suitable for running
-        the 'Operation' and 'Read' tests.  Resource IDs may not remain valid as this is an
-        open server.
-      * IPS Example Summary Bundle: Populates the 'IPS Resource Validation Test' with an
-        example provided in the IG.
+      Available Presets:
+      * HL7.org IPS Server: A hosted reference implementation suitable for Operation and Read tests
+        (Note: Resource IDs may change as this is an open server)
+      * IPS Example Summary Bundle: Pre-populated example from the IG for Resource Validation testing
     )
 
     id 'ips'
@@ -71,11 +70,18 @@ module IPS
       title 'IPS Server Operations for Generating IPS Bundles Tests'
       short_title 'IPS Operation Tests'
       description %(
-        This group evaluates the ability of systems to provide a standard FHIR
-        API for generating and communicating an IPS Bundle as described in the
-        [IPS Data Generation and Inclusion Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+        This group evaluates the ability of systems to provide a standard FHIR API for generating
+        and communicating IPS Bundles as described in the [IPS Data Generation and Inclusion
+        Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
 
-        Please note that the DocRef tests are currently of limited scope.
+        Key Features:
+        * Testing of $summary operation for generating IPS bundles
+        * Validation of generated bundles against IPS profiles
+        * Basic DocumentReference operation support
+        * Verification of proper resource relationships and references
+
+        Note: The DocumentReference operation tests are currently of limited scope but will be
+        expanded in future versions.
       )
 
 
@@ -92,6 +98,20 @@ module IPS
     group do
       title 'IPS Server Read and Validate Profiles Tests'
       short_title 'IPS Read Tests'
+      description %(
+        This group validates a system's ability to provide FHIR API access to individual IPS resources.
+        Each resource must conform to the profiles specified in the IPS Implementation Guide.
+
+        Key Features:
+        * Individual resource retrieval via FHIR RESTful API
+        * Profile validation for each resource type
+        * Verification of required elements and extensions
+        * Testing of resource references and relationships
+
+        These tests are optional as not all IPS implementations are required to provide direct
+        resource access. They are particularly relevant for systems that maintain IPS data and
+        provide API access to individual resources.
+      )
       optional
 
       input :url, title: 'IPS FHIR Server Base URL'
@@ -114,8 +134,18 @@ module IPS
       group from: :ips_medication
       group from: :ips_medication_request
       group from: :ips_medication_statement
-      group  do
+      group do
         title 'Observation Profiles'
+        description %(
+          This group validates various observation resources that capture specific patient health data
+          points as defined in the IPS Implementation Guide.
+
+          Key Features:
+          * Validation of lifestyle observations (alcohol and tobacco use)
+          * Verification of pregnancy-related observations
+          * Support for both coded and free-text entries
+          * Proper use of required terminologies
+        )
 
         group from: :ips_observation_alcohol_use
         group from: :ips_observation_pregnancy_edd
@@ -123,8 +153,19 @@ module IPS
         group from: :ips_observation_pregnancy_status
         group from: :ips_observation_tobacco_use
       end
+
       group do
         title 'Observation Result Profiles'
+        description %(
+          This group validates observation resources that represent clinical findings and measurements
+          as specified in the IPS Implementation Guide.
+
+          Key Features:
+          * Support for laboratory, pathology, and radiology results
+          * Validation of required measurement units and codes
+          * Verification of proper result structure and formatting
+          * Testing of optional components like reference ranges
+        )
 
         group from: :ips_observation_results
         group from: :ips_observation_results_laboratory
