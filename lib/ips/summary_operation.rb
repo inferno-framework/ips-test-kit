@@ -5,8 +5,18 @@ module IPS
   class SummaryOperation < Inferno::TestGroup
     title 'Summary Operation Tests'
     description %(
-        Verify support for the $summary operation as as described in the [IPS
-        Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+      This group tests server support for the Patient/$summary operation as defined in the 
+      IPS Implementation Guide v1.1.0. The tests validate both the operational capability 
+      declaration and the structure and content of returned IPS Bundle resources.
+
+      Key capabilities tested:
+      - CapabilityStatement declares $summary operation support
+      - $summary operation returns valid IPS Bundle
+      - Bundle contains required Composition as first entry
+      - Bundle contains valid IPS resource profiles for core clinical data
+
+      Tests use GET requests for the $summary operation and validate returned Bundle 
+      entries against their respective IPS profiles.
     )
     id :ips_summary_operation
     run_as_group
@@ -18,9 +28,16 @@ module IPS
     test from: :ips_summary_operation_valid_composition
 
     test do
-      title 'IPS Server returns Bundle resource containing valid IPS MedicationStatement entry'
+      title 'Bundle contains valid IPS MedicationStatement resources'
       description %(
-        IPS Server return valid IPS MedicationStatement resource in the Bundle as first entry
+        This test verifies that the Bundle returned by the $summary operation contains 
+        at least one MedicationStatement resource and that all MedicationStatement 
+        resources conform to the IPS MedicationStatement profile.
+
+        The test skips if no Bundle was returned from the $summary operation. It checks 
+        for the presence of MedicationStatement resources within the Bundle entries and 
+        validates each MedicationStatement against the IPS MedicationStatement profile 
+        (http://hl7.org/fhir/uv/ips/StructureDefinition/MedicationStatement-uv-ips).
       )
       # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-MedicationStatement-uv-ips.html'
       uses_request :summary_operation
@@ -41,9 +58,16 @@ module IPS
     end
 
     test do
-      title 'IPS Server returns Bundle resource containing valid IPS AllergyIntolerance entry'
+      title 'Bundle contains valid IPS AllergyIntolerance resources'
       description %(
-        IPS Server return valid IPS AllergyIntolerance resource in the Bundle as first entry
+        This test verifies that the Bundle returned by the $summary operation contains 
+        at least one AllergyIntolerance resource and that all AllergyIntolerance 
+        resources conform to the IPS AllergyIntolerance profile.
+
+        The test skips if no Bundle was returned from the $summary operation. It checks 
+        for the presence of AllergyIntolerance resources within the Bundle entries and 
+        validates each AllergyIntolerance against the IPS AllergyIntolerance profile 
+        (http://hl7.org/fhir/uv/ips/StructureDefinition/AllergyIntolerance-uv-ips).
       )
       # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-AllergyIntolerance-uv-ips.html'
       uses_request :summary_operation
@@ -64,9 +88,16 @@ module IPS
     end
 
     test do
-      title 'IPS Server returns Bundle resource containing valid IPS Condition entry'
+      title 'Bundle contains valid IPS Condition resources'
       description %(
-        IPS Server return valid IPS Condition resource in the Bundle as first entry
+        This test verifies that the Bundle returned by the $summary operation contains 
+        at least one Condition resource and that all Condition resources conform to 
+        the IPS Condition profile.
+
+        The test skips if no Bundle was returned from the $summary operation. It checks 
+        for the presence of Condition resources within the Bundle entries and validates 
+        each Condition against the IPS Condition profile 
+        (http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips).
       )
       # link 'http://hl7.org/fhir/uv/ips/StructureDefinition-Condition-uv-ips.html'
       uses_request :summary_operation
