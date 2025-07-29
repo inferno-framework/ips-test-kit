@@ -6,29 +6,70 @@ module IPS
     title 'International Patient Summary (IPS) v1.1.0'
     short_title 'IPS v1.1.0'
     description %(
-      This test suite evaluates the ability of a system to provide patient
-      summary data expressed using HL7® FHIR® in accordance with the
-      [International Patient Summary Implementation Guide (IPS
-      IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).
+      This test suite evaluates the ability of systems to provide patient summary data 
+      expressed using HL7® FHIR® R4 in accordance with the [International Patient Summary 
+      Implementation Guide (IPS IG) v1.1.0](https://www.hl7.org/fhir/uv/ips/STU1.1).
 
-      Because IPS bundles can be generated and transmitted in many different
-      ways beyond a traditional FHIR RESTful server, this test suite allows you
-      to optionally evaluate a single bundle that is not being provided by a server in the
-      'IPS Resource Validation Tests'.
+      The suite provides three distinct testing approaches to accommodate different 
+      implementation scenarios and system capabilities:
 
-      For systems that support a standard API for generating and communicating
-      these bundles in accordance with the guidance provided in the IG, use the
-      'IPS Operation Tests'.
+      **Testing Approaches:**
 
-      For systems that also provide a FHIR API access to the components resources
-      of the IPS bundle, use the 'IPS Read Tests'.
+      - **IPS Resource Validation Tests**: For validating pre-existing IPS bundles without 
+        requiring a live FHIR server. Use this approach when you have static IPS documents 
+        to validate or when testing bundle structure and profile conformance offline.
 
-      This suite provides two presets:
-      * HL7.org IPS Server: Hosted reference IPS Server.  This is suitable for running
-        the 'Operation' and 'Read' tests.  Resource IDs may not remain valid as this is an
-        open server.
-      * IPS Example Summary Bundle: Populates the 'IPS Resource Validation Test' with an
-        example provided in the IG.
+      - **IPS Operation Tests**: For testing systems that implement the $summary operation 
+        and document reference capabilities as defined in the IPS IG. Use this approach 
+        when your system generates IPS bundles dynamically via FHIR operations.
+
+      - **IPS Read Tests**: For validating individual IPS resource profiles via standard 
+        FHIR read operations. Use this approach when your system provides RESTful access 
+        to individual IPS resources and you want to test profile conformance at the 
+        resource level.
+
+      **Key Capabilities Tested:**
+
+      *Structural Validation:*
+      - IPS Bundle structure and composition requirements
+      - Resource entry organization and references
+      - Required vs. optional section validation
+
+      *Profile Conformance:*
+      - All required IPS profiles (Patient, AllergyIntolerance, Condition, Medication, etc.)
+      - Optional IPS profiles for comprehensive coverage
+      - Cardinality constraints and element requirements
+
+      *Operational Capabilities:*
+      - $summary operation implementation and response validation
+      - Document reference creation and retrieval workflows
+      - Bundle generation from patient data
+
+      *Terminology Validation:*
+      - Value set bindings for coded elements
+      - Required terminology systems and codes
+      - IPS-specific code system usage
+
+      **Prerequisites:**
+      - FHIR R4 server implementation (for Operation and Read tests)
+      - Valid patient data conforming to IPS profiles
+      - For Operation tests: Implementation of the $summary operation
+      - For Read tests: RESTful FHIR API with read capabilities
+
+      **Available Presets:**
+
+      - **HL7.org IPS Server**: Pre-configured for testing against the hosted reference 
+        IPS server. Suitable for Operation and Read tests. Note that resource IDs may 
+        change as this is a shared testing environment.
+
+      - **IPS Example Summary Bundle**: Pre-loads the Resource Validation tests with 
+        example IPS bundles from the specification. Ideal for initial validation and 
+        understanding IPS structure requirements.
+
+      **Scope and Limitations:**
+      This suite focuses on IPS document structure, profile conformance, and core operational 
+      requirements. It does not test advanced workflow scenarios, security implementations, 
+      or integration with external systems beyond the IPS specification scope.
     )
 
     id 'ips'
@@ -92,6 +133,34 @@ module IPS
     group do
       title 'IPS Server Read and Validate Profiles Tests'
       short_title 'IPS Read Tests'
+      description %(
+        This group tests server support for individual IPS resource profiles via standard 
+        FHIR read operations. It validates that servers can provide RESTful access to IPS 
+        resources and that these resources conform to their respective IPS profile requirements.
+
+        Each resource type test group performs two key validations:
+        - **Read Operation Test**: Executes a FHIR read operation using the provided resource ID, 
+          verifies successful HTTP 200 response, confirms correct resource type, and validates 
+          that the returned resource has the expected ID
+        - **Profile Conformance Test**: Validates that the retrieved resource conforms to its 
+          specific IPS profile requirements including structural constraints, cardinality rules, 
+          and terminology bindings
+
+        This testing approach is suitable for servers that store IPS resources individually 
+        and provide standard FHIR RESTful API access. It requires valid resource IDs for 
+        each resource type being tested.
+
+        **Prerequisites**: 
+        - FHIR R4 server with RESTful read capabilities
+        - Valid resource IDs for the IPS resources to be tested
+        - Resources that conform to IPS profile requirements
+
+        **Coverage**: Tests all IPS resource profiles including:
+        - Core structural profiles (Bundle, Composition, Patient) - always required
+        - Required section profiles (AllergyIntolerance, Condition, MedicationStatement/MedicationRequest/Medication)
+        - Recommended section profiles (Immunization, Procedure, DiagnosticReport, Device profiles)
+        - Optional section profiles (Observation variants for vital signs, pregnancy, social history, etc.)
+      )
       optional
 
       input :url, title: 'IPS FHIR Server Base URL'

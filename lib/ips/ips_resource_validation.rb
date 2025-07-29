@@ -3,25 +3,41 @@ module IPS
     title 'IPS Resource Validation Tests'
     id :ips_resource_validation
     description %(
-      This group performs content validation, which is useful for evaluating
-      conformance of systems that produce IPS bundles but do not generate
-      content using a FHIR interface as described in the [IPS
-      Guidance](http://hl7.org/fhir/uv/ips/STU1.1/ipsGeneration.html).
+      This group validates pre-existing IPS bundles for conformance to the IPS Bundle profile 
+      without requiring a live FHIR server. It is designed for testing static IPS documents 
+      or validating bundle structure and profile conformance offline.
 
-      There is currently a single validation test for IPS bundles without any
-      other context-specific constraints.  Therefore, this test measures a
-      systems ability to produce a single, valid IPS bundle. Future enhancements
-      to these tests should require systems to demonstrate more than just a
-      single valid IPS bundle.
+      The validation tests accept IPS bundle content in JSON format and verify 
+      conformance to the IPS Bundle profile (http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips) 
+      as defined in the IPS Implementation Guide v1.1.0.
+
+      This testing approach is ideal for:
+      - Systems that generate IPS bundles through non-FHIR interfaces
+      - Offline validation of existing IPS documents  
+      - Initial conformance testing during development
+      - Validating IPS bundles before deployment
+
+      The group currently provides basic IPS Bundle profile validation. Additional context-specific 
+      validation tests may be added to verify specific clinical scenarios or content requirements.
     )
 
     group do
-      title 'IPS Bundle with no other constraints'
+      title 'Basic IPS Bundle Validation'
 
       test do
         title 'IPS Bundle meets constraints provided in the IPS Bundle profile'
         description %(
-          This test will validate the content of an IPS bundle to ensure it is valid.
+          This test validates that the provided bundle content is a valid FHIR Bundle resource 
+          that conforms to the IPS Bundle profile (http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips).
+
+          The test performs the following validations:
+          - Parses the provided bundle content (JSON format)
+          - Verifies the resource is of type Bundle
+          - Validates conformance to the IPS Bundle profile constraints
+
+          The test will skip if no bundle content is provided. Profile validation includes 
+          verification of required elements, cardinality constraints, terminology bindings, 
+          and structural requirements as defined in the IPS Implementation Guide v1.1.0.
         )
         input :bundle_content, title: 'IPS Bundle', type: 'textarea', optional: true, description: 'Validate a single IPS bundle (optional)'
   

@@ -2,19 +2,24 @@
 
 module IPS
   class SummaryOperationReturnBundle < Inferno::Test
-    title 'IPS Server returns Bundle resource for Patient/[id]/$summary GET operation'
+    title 'Server returns valid IPS Bundle for Patient/$summary operation'
     description %(
-      IPS Server returns a valid IPS Bundle resource as successful result of
-      $summary operation.
+      This test verifies that the server returns a valid IPS Bundle resource when 
+      the Patient/$summary operation is invoked. The test performs a GET request 
+      to the Patient/[id]/$summary endpoint and validates the response.
 
-      This test currently only issues a GET request for the summary due to a
-      limitation in Inferno in issuing POST requests that omit a Content-Type
-      header when the body is empty. Inferno currently adds a `Content-Type:
-      application/x-www-form-urlencoded` header when issuing a POST with no
-      body, which causes issues in known reference implementations.
+      The test validates:
+      - HTTP 200 response status
+      - Response contains a Bundle resource
+      - Bundle conforms to the IPS Bundle profile (http://hl7.org/fhir/uv/ips/StructureDefinition/Bundle-uv-ips)
 
-      A future update to this test suite should include a required POST
-      request as well as an optional GET request for this content.
+      Note: This test currently uses only GET requests due to a limitation in Inferno 
+      where POST requests with empty bodies include an unwanted Content-Type header 
+      that causes issues with some reference implementations. Future versions may 
+      include both GET and POST request testing.
+
+      This test requires a valid patient_id input and creates a summary_operation 
+      request that can be referenced by subsequent tests.
     )
     id :ips_summary_operation_return_bundle
 

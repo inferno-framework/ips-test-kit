@@ -14,7 +14,7 @@ a preliminary test suite.
 ## Instructions
 
 It is highly recommended that you use [Docker](https://www.docker.com/) to run
-these tests.  This test kit requires at least 10 GB of memory are available to Docker.
+these tests. This test kit requires at least 10 GB of memory to be available to Docker.
 
 - Clone this repo.
 - Run `setup.sh` in this repo.
@@ -24,6 +24,15 @@ these tests.  This test kit requires at least 10 GB of memory are available to D
 See the [Inferno Framework
 Documentation](https://inferno-framework.github.io/docs/getting-started-users.html)
 for more information on running Inferno.
+
+## Description Authoring Guide
+
+An experimental [Description Authoring
+Guide](docs/description_authoring_guide.md) is available to assist developers
+and LLMs in writing thorough and up-to-date descriptions for test
+implementations. This guide provides detailed guidance on analyzing test code
+and authoring accurate descriptions at all levels of the test hierarchy (test
+kit, suite, group, and individual test levels).
 
 ## License
 

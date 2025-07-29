@@ -2,9 +2,17 @@
 
 module IPS
   class SummaryOperationSupport < Inferno::Test
-    title 'IPS Server declares support for $summary operation in CapabilityStatement'
+    title 'Server declares support for $summary operation in CapabilityStatement'
     description %(
-      The IPS Server declares support for Patient/[id]/$summary operation in its server CapabilityStatement
+      This test verifies that the server declares support for the Patient/$summary operation 
+      in its CapabilityStatement. The test retrieves the server's CapabilityStatement and 
+      searches for the $summary operation definition in the Patient resource operations.
+
+      The test checks for either:
+      - An operation with the definition URL http://hl7.org/fhir/uv/ips/OperationDefinition/summary
+      - An operation with the name "summary" or "patient-summary" (case-insensitive)
+
+      This test expects a successful HTTP 200 response when retrieving the CapabilityStatement.
     )
     id :ips_summary_operation_support
 

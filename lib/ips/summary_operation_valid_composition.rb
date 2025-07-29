@@ -2,8 +2,20 @@
 
 module IPS
   class SummaryOperationValidComposition < Inferno::Test
-    title 'IPS Server returns Bundle resource containing valid IPS Composition entry'
-    description 'IPS Server return valid IPS Composition resource in the Bundle as first entry'
+    title 'Bundle contains valid IPS Composition as first entry'
+    description %(
+      This test verifies that the Bundle returned by the $summary operation contains 
+      a valid IPS Composition resource as the first entry, as required by the IPS 
+      specification.
+
+      The test validates:
+      - Bundle contains at least one entry
+      - First entry in the Bundle is a Composition resource
+      - Composition conforms to the IPS Composition profile (http://hl7.org/fhir/uv/ips/StructureDefinition/Composition-uv-ips)
+
+      The test skips if no Bundle was returned from the $summary operation. This test 
+      uses the Bundle resource from the previous summary_operation request.
+    )
     id :ips_summary_operation_valid_composition
     uses_request :summary_operation
 
